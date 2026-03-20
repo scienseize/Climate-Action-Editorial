@@ -10,8 +10,12 @@ function loadData() {
   // URL params are set by the calculator redirect — works on all browsers with file://
   const params = new URLSearchParams(window.location.search);
   if (params.get('dailyKg')) {
+    let legs = [];
+    try { legs = JSON.parse(params.get('legs') || '[]'); } catch(e) {}
     const data = {
-      mode:        params.get('mode'),
+      legs,
+      mode:        params.get('primaryMode') || params.get('mode') || '',
+      primaryMode: params.get('primaryMode') || params.get('mode') || '',
       distanceKm:  parseFloat(params.get('distanceKm')),
       dailyKg:     parseFloat(params.get('dailyKg')),
       dangerLabel: params.get('dangerLabel'),
@@ -26,7 +30,12 @@ function loadData() {
   // Fallback: same-origin navigation (served via HTTP)
   try {
     const raw = localStorage.getItem('climateCalcResult');
-    if (raw) return JSON.parse(raw);
+    if (raw) {
+      const d = JSON.parse(raw);
+      if (!d.primaryMode) d.primaryMode = d.mode;
+      if (!d.mode) d.mode = d.primaryMode;
+      return d;
+    }
   } catch(e) {}
   return null;
 }
@@ -53,7 +62,11 @@ function indicatorPosition(level) {
 
 // Mode display label
 function modeLabel(mode) {
-  const labels = { car: 'private vehicle', bus: 'bus/jeepney', train: 'MRT/LRT', bicycle: 'bicycle', walking: 'walking' };
+  const labels = {
+    car: 'private vehicle', motorcycle: 'motorcycle (ride-hailing)',
+    jeepney: 'jeepney', hybrid: 'hybrid car', ev: 'electric vehicle',
+    bus: 'bus', train: 'MRT/LRT', bicycle: 'bicycle', walking: 'walking'
+  };
   return labels[mode] || mode;
 }
 
@@ -79,53 +92,108 @@ const REC_ICONS = {
 
 function buildRecommendations(data) {
   const recs = [];
+  const mode = data.mode;
+  const dist = data.distanceKm;
 
-  if (data.mode === 'car') {
-    const busSavingKg  = (0.21 - 0.089) * data.distanceKm * 2;
-    const busSavingT   = ((busSavingKg * 230) / 1000).toFixed(1);
-    const busPct       = Math.round((busSavingKg / data.dailyKg) * 100);
+  // ---- Rec 1: Best transit / mode shift ----
+  if (mode === 'car') {
+    const savKg = (0.21 - 0.089) * dist * 2;
+    const savT  = ((savKg * 230) / 1000).toFixed(1);
+    const pct   = Math.round((savKg / data.dailyKg) * 100);
     recs.push({
       icon: REC_ICONS.transit,
       title: 'Transit Shift',
-      desc: `Switching to a jeepney or Bus Rapid Transit (BRT) for even 3 days a week could save ${busSavingT} tons of CO₂ annually — bringing you ${busPct}% closer to your climate targets.`,
+      desc: `Switching to a jeepney or BRT for even 3 days a week could save ${savT} tonnes of CO₂ annually — bringing you ${pct}% closer to your climate targets.`,
     });
-  } else if (data.mode === 'bus') {
-    const trainSavingKg = (0.089 - 0.041) * data.distanceKm * 2;
-    const trainSavingT  = ((trainSavingKg * 230) / 1000).toFixed(1);
+  } else if (mode === 'motorcycle') {
+    const savKg = (0.103 - 0.041) * dist * 2;
+    const savT  = ((savKg * 230) / 1000).toFixed(1);
+    const pct   = Math.round((savKg / data.dailyKg) * 100);
     recs.push({
       icon: REC_ICONS.transit,
       title: 'Upgrade to Rail',
-      desc: `The MRT-3 and LRT lines emit up to 54% less CO₂ than buses. Switching could save ${trainSavingT}t of CO₂ per year and bring you significantly closer to SDG 13 targets.`,
+      desc: `Swapping your motorcycle ride-hail for MRT/LRT could save ${savT} tonnes of CO₂ annually — a ${pct}% reduction — while avoiding traffic entirely.`,
+    });
+  } else if (mode === 'jeepney') {
+    const savKg = (0.10 - 0.041) * dist * 2;
+    const savT  = ((savKg * 230) / 1000).toFixed(1);
+    recs.push({
+      icon: REC_ICONS.transit,
+      title: 'Upgrade to Rail',
+      desc: `The MRT-3 and LRT lines emit 59% less CO₂ per passenger than a traditional jeepney. Switching could save ${savT} tonnes of CO₂ per year.`,
+    });
+  } else if (mode === 'bus') {
+    const savKg = (0.089 - 0.041) * dist * 2;
+    const savT  = ((savKg * 230) / 1000).toFixed(1);
+    recs.push({
+      icon: REC_ICONS.transit,
+      title: 'Upgrade to Rail',
+      desc: `The MRT-3 and LRT lines emit 54% less CO₂ than buses per passenger. Switching could save ${savT} tonnes of CO₂ per year.`,
+    });
+  } else if (mode === 'hybrid') {
+    const pct = Math.round((1 - 0.053 / 0.11) * 100);
+    recs.push({
+      icon: REC_ICONS.transit,
+      title: 'Go Full Electric',
+      desc: `You're already ahead with a hybrid. Completing the switch to a full EV under the DOE incentive program would cut your remaining commute emissions by a further ${pct}%.`,
     });
   } else {
+    // ev, train, bicycle, walking
+    const isZero = mode === 'bicycle' || mode === 'walking';
     recs.push({
       icon: REC_ICONS.green,
       title: 'Stay Green',
-      desc: 'Your current transport mode already produces zero direct emissions. You\'re leading by example — encourage others to make the switch.',
+      desc: isZero
+        ? 'Your transport mode produces zero direct emissions. You\'re leading by example — encourage others in your workplace to make the switch.'
+        : 'Your commute is already among the lowest-emission options available. Charging from solar or a green energy provider brings that even closer to zero.',
     });
   }
 
-  if (data.mode === 'car') {
-    const evSavingKg = (0.21 - 0.053) * data.distanceKm * 2;
-    const evPct      = Math.round((evSavingKg / data.dailyKg) * 100);
+  // ---- Rec 2: Electrification / energy ----
+  if (mode === 'car') {
+    const savKg = (0.21 - 0.053) * dist * 2;
+    const pct   = Math.round((savKg / data.dailyKg) * 100);
     recs.push({
       icon: REC_ICONS.ev,
       title: 'Electrification',
-      desc: `The DOE's e-vehicle incentive program makes EV adoption more accessible. Switching to an e-vehicle for your commute would reduce transportation emissions by ${evPct}% immediately.`,
+      desc: `The DOE's e-vehicle incentive program makes EVs more accessible. Switching from your ICE car would reduce commute emissions by ${pct}% immediately.`,
+    });
+  } else if (mode === 'motorcycle') {
+    const savKg = (0.103 - 0.053) * dist * 2;
+    const savT  = ((savKg * 230) / 1000).toFixed(1);
+    recs.push({
+      icon: REC_ICONS.ev,
+      title: 'E-Motorcycle Switch',
+      desc: `Platforms like Angkas and Joyride are expanding e-motorcycle fleets. Switching could save ${savT} tonnes of CO₂ annually with the same door-to-door convenience.`,
+    });
+  } else if (mode === 'hybrid') {
+    const savKg = (0.11 - 0.053) * dist * 2;
+    const savT  = ((savKg * 230) / 1000).toFixed(1);
+    recs.push({
+      icon: REC_ICONS.ev,
+      title: 'Full EV Transition',
+      desc: `Going from hybrid to full EV could save an additional ${savT} tonnes of CO₂ per year. The DOE's EV incentive program and growing charging infrastructure make this increasingly practical.`,
+    });
+  } else if (mode === 'jeepney') {
+    recs.push({
+      icon: REC_ICONS.ev,
+      title: 'Support E-Jeepney',
+      desc: 'The government\'s PUV Modernization Program is replacing traditional diesel jeepneys with electric units. Choosing e-jeepney routes when available can cut per-passenger emissions by up to 70%.',
     });
   } else {
     recs.push({
       icon: REC_ICONS.ev,
-      title: 'Renewable Energy',
-      desc: 'Even with low-emission transport, household energy is a key source. The Philippines targets 35% renewable energy by 2030 — switching to a green energy provider supports this goal and can cut your home footprint significantly.',
+      title: 'Renewable Energy at Home',
+      desc: 'The Philippines targets 35% renewable energy by 2030. Installing solar panels or switching to a green energy provider reduces your household footprint and supports the national clean energy transition.',
     });
   }
 
+  // ---- Rec 3: Hybrid Work (all modes) ----
   const hybridSavingT = ((data.dailyKg * 0.2 * 230) / 1000).toFixed(2);
   recs.push({
     icon: REC_ICONS.hybrid,
     title: 'Hybrid Work',
-    desc: `Metro Manila workers lose an average of 66 minutes to traffic daily. Working from home just one day a week eliminates ${hybridSavingT} tons of annual emissions and reclaims hours of your week.`,
+    desc: `Metro Manila workers lose an average of 66 minutes to traffic daily. Working from home just one day a week eliminates ${hybridSavingT} tonnes of annual emissions and reclaims hours of your week.`,
   });
 
   return recs;
@@ -205,13 +273,15 @@ function populate(data) {
   // Context line (hero subtitle)
   const ctxEl = document.getElementById('res-context');
   if (ctxEl) {
-    const dist   = data.distanceKm || 0;
-    const mode   = modeLabel(data.mode);
+    const dist        = data.distanceKm || 0;
+    const commuteDesc = (data.legs && data.legs.length > 1)
+      ? `${data.legs.length}-mode commute`
+      : modeLabel(data.mode);
     const diff   = data.dailyKg - SDG_TARGET_DAILY_KG;
     const suffix = diff > 0
       ? 'your footprint significantly exceeds sustainable SDG thresholds.'
       : 'your footprint is within sustainable SDG thresholds.';
-    ctxEl.textContent = `Based on your daily ${dist}-km round trip via ${mode}, ${suffix}`;
+    ctxEl.textContent = `Based on your daily ${dist}-km commute via ${commuteDesc}, ${suffix}`;
   }
 
   // Emission summary (urgency card italic)

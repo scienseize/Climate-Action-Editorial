@@ -83,79 +83,29 @@
 
         <form id="calculator-form" novalidate>
 
-          <!-- Step 1: Transport Mode -->
-          <fieldset class="mb-8">
-            <legend class="text-lg font-bold text-gray-900 mb-1">
-              <span class="text-primary mr-2">01</span>Transport Mode
-            </legend>
-            <p class="text-sm text-gray-500 mb-4">How do you typically commute to work?</p>
-
-            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3" role="radiogroup" aria-label="Transport mode selection">
-
-              <label class="mode-option rounded-xl p-4 flex flex-col items-center gap-2 cursor-pointer select-none bg-white border-2 border-gray-200">
-                <input type="radio" name="transport-mode" value="car" class="sr-only" />
-                <span class="text-3xl">🚗</span>
-                <span class="text-sm font-semibold text-gray-700">Car</span>
-                <span class="text-xs text-gray-400">0.21 kg/km</span>
-              </label>
-
-              <label class="mode-option rounded-xl p-4 flex flex-col items-center gap-2 cursor-pointer select-none bg-white border-2 border-gray-200">
-                <input type="radio" name="transport-mode" value="bus" class="sr-only" />
-                <span class="text-3xl">🚌</span>
-                <span class="text-sm font-semibold text-gray-700">Bus</span>
-                <span class="text-xs text-gray-400">0.089 kg/km</span>
-              </label>
-
-              <label class="mode-option rounded-xl p-4 flex flex-col items-center gap-2 cursor-pointer select-none bg-white border-2 border-gray-200">
-                <input type="radio" name="transport-mode" value="train" class="sr-only" />
-                <span class="text-3xl">🚆</span>
-                <span class="text-sm font-semibold text-gray-700">Train</span>
-                <span class="text-xs text-gray-400">0.041 kg/km</span>
-              </label>
-
-              <label class="mode-option rounded-xl p-4 flex flex-col items-center gap-2 cursor-pointer select-none bg-white border-2 border-gray-200">
-                <input type="radio" name="transport-mode" value="bicycle" class="sr-only" />
-                <span class="text-3xl">🚲</span>
-                <span class="text-sm font-semibold text-gray-700">Bicycle</span>
-                <span class="text-xs text-gray-400">0 kg/km</span>
-              </label>
-
-              <label class="mode-option rounded-xl p-4 flex flex-col items-center gap-2 cursor-pointer select-none bg-white border-2 border-gray-200">
-                <input type="radio" name="transport-mode" value="walking" class="sr-only" />
-                <span class="text-3xl">🚶</span>
-                <span class="text-sm font-semibold text-gray-700">Walking</span>
-                <span class="text-xs text-gray-400">0 kg/km</span>
-              </label>
-
-            </div>
-          </fieldset>
-
-          <!-- Step 2: Distance -->
-          <div class="mb-6">
-            <label for="distance" class="block text-lg font-bold text-gray-900 mb-1">
-              <span class="text-primary mr-2">02</span>One-Way Distance (km)
-            </label>
-            <p class="text-sm text-gray-500 mb-3">Distance from home to workplace (one way). We'll double it for the round trip.</p>
-            <div class="flex items-center gap-3">
-              <input
-                type="number"
-                id="distance"
-                name="distance"
-                min="0"
-                max="500"
-                step="0.5"
-                placeholder="e.g. 25"
-                required
-                class="flex-1 bg-white border-2 border-gray-200 focus:border-primary focus:outline-none text-gray-900 rounded-xl px-4 py-3 text-lg transition-colors"
-              />
-              <span class="text-gray-500 font-semibold">km</span>
-            </div>
+          <!-- Step 1: Commute Legs -->
+          <div class="mb-8">
+            <p class="text-lg font-bold text-gray-900 mb-1">
+              <span class="text-primary mr-2">01</span>Your Commute Legs
+            </p>
+            <p class="text-sm text-gray-500 mb-4">Add each segment of your daily commute. We'll double each leg for the round trip.</p>
+            <div id="legs-container" class="space-y-3 mb-4"></div>
+            <button
+              type="button"
+              id="add-leg-btn"
+              class="flex items-center gap-2 text-sm font-semibold text-primary border-2 border-primary border-dashed rounded-xl px-4 py-2.5 hover:bg-green-50 transition-colors"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+              </svg>
+              Add Another Leg
+            </button>
           </div>
 
-          <!-- Step 3: Name -->
+          <!-- Step 2: Name -->
           <div class="mb-6">
             <label for="user-name" class="block text-lg font-bold text-gray-900 mb-1">
-              <span class="text-primary mr-2">03</span>Your Name
+              <span class="text-primary mr-2">02</span>Your Name
               <span class="text-sm font-normal text-gray-400 ml-2">(optional)</span>
             </label>
             <p class="text-sm text-gray-500 mb-3">Used to personalise your results dashboard.</p>
@@ -169,10 +119,10 @@
             />
           </div>
 
-          <!-- Step 4: Email (optional) -->
+          <!-- Step 3: Email (optional) -->
           <div class="mb-8">
             <label for="user-email" class="block text-lg font-bold text-gray-900 mb-1">
-              <span class="text-primary mr-2">04</span>Email
+              <span class="text-primary mr-2">03</span>Email
               <span class="text-sm font-normal text-gray-400 ml-2">(optional)</span>
             </label>
             <p class="text-sm text-gray-500 mb-3">For your records only — we do not transmit or store this externally.</p>
@@ -207,7 +157,7 @@
 
           <!-- Transport -->
           <div class="mb-6 pb-6 border-b border-gray-100">
-            <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">Transport Mode</p>
+            <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">Commute</p>
             <p id="lp-transport" class="text-xl font-bold text-gray-900">—</p>
           </div>
 
