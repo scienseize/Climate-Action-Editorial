@@ -88,7 +88,6 @@ function buildRecommendations(data) {
       icon: REC_ICONS.transit,
       title: 'Transit Shift',
       desc: `Take the bus ${Math.ceil(230 * 0.4)} days a week to save ${busSavingT} tons of CO2. This single change brings you ${busPct}% closer to your climate targets.`,
-      link: 'VIEW ROUTE PLANNER',
     });
   } else if (data.mode === 'bus') {
     const trainSavingKg = (0.089 - 0.041) * data.distanceKm * 2;
@@ -97,14 +96,12 @@ function buildRecommendations(data) {
       icon: REC_ICONS.transit,
       title: 'Upgrade to Rail',
       desc: `Trains emit 54% less CO₂ than buses. Switching could save ${trainSavingT}t of CO₂ per year and bring you significantly closer to SDG 13 targets.`,
-      link: 'VIEW ROUTE PLANNER',
     });
   } else {
     recs.push({
       icon: REC_ICONS.green,
       title: 'Stay Green',
       desc: 'Your current transport mode already produces zero direct emissions. You\'re leading by example — encourage others to make the switch.',
-      link: 'SHARE YOUR IMPACT',
     });
   }
 
@@ -115,14 +112,12 @@ function buildRecommendations(data) {
       icon: REC_ICONS.ev,
       title: 'Electrification',
       desc: `Switching to a used EV for your commute would reduce transportation emissions by ${evPct}% immediately.`,
-      link: 'EV SAVINGS CALCULATOR',
     });
   } else {
     recs.push({
       icon: REC_ICONS.ev,
       title: 'Renewable Energy',
       desc: 'Even with low-emission transport, home energy is often the largest carbon source. Switching to a green energy tariff can cut your household footprint by 2–8 kg CO₂/day.',
-      link: 'ENERGY COMPARISON',
     });
   }
 
@@ -131,7 +126,6 @@ function buildRecommendations(data) {
     icon: REC_ICONS.hybrid,
     title: 'Hybrid Work',
     desc: `Working from home just one day a week eliminates ${hybridSavingT} tons of annual emissions.`,
-    link: 'IMPACT BREAKDOWN',
   });
 
   return recs;
@@ -186,16 +180,10 @@ function buildRecCards(data) {
   if (!container) return;
   const recs = buildRecommendations(data);
   container.innerHTML = recs.map(r => `
-    <div class="rec-card bg-slate-100 rounded-2xl p-8 flex flex-col">
+    <div class="rec-card bg-slate-100 rounded-2xl p-8">
       <div class="mb-5">${r.icon}</div>
       <h3 class="text-xl font-bold text-gray-900 mb-3">${r.title}</h3>
-      <p class="text-sm text-gray-600 leading-relaxed flex-1 mb-6">${r.desc}</p>
-      <p class="text-xs font-bold tracking-widest uppercase text-primary flex items-center gap-1">
-        ${r.link}
-        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"/>
-        </svg>
-      </p>
+      <p class="text-sm text-gray-600 leading-relaxed">${r.desc}</p>
     </div>
   `).join('');
 }
