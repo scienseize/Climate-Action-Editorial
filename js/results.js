@@ -1,43 +1,23 @@
 const SDG_TARGET_YEARLY_T = 1.8; // tonnes/yr
 const SDG_TARGET_DAILY_KG = 7.83; // ~8 kg/day = 1800 kg/yr ÷ 230 days
 
-// ---- Load data: URL params first (cross-file compatible), then localStorage ----
+// ---- Load data: URL params only (set by calculator submit redirect) ----
 function loadData() {
-  // URL params are set by the calculator redirect — works on all browsers with file://
   const params = new URLSearchParams(window.location.search);
-  if (params.get("dailyKg")) {
-    let legs = [];
-    try {
-      legs = JSON.parse(params.get("legs") || "[]");
-    } catch (e) {}
-    const data = {
-      legs,
-      mode: params.get("primaryMode") || params.get("mode") || "",
-      primaryMode: params.get("primaryMode") || params.get("mode") || "",
-      distanceKm: parseFloat(params.get("distanceKm")),
-      dailyKg: parseFloat(params.get("dailyKg")),
-      dangerLabel: params.get("dangerLabel"),
-      name: params.get("name") || "",
-      timestamp: params.get("timestamp"),
-    };
-    // Mirror to localStorage so the calculator can pre-fill on Recalculate
-    try {
-      localStorage.setItem("climateCalcResult", JSON.stringify(data));
-    } catch (e) {}
-    return data;
-  }
+  if (!params.get("dailyKg")) return null;
 
-  // Fallback: same-origin navigation (served via HTTP)
-  try {
-    const raw = localStorage.getItem("climateCalcResult");
-    if (raw) {
-      const d = JSON.parse(raw);
-      if (!d.primaryMode) d.primaryMode = d.mode;
-      if (!d.mode) d.mode = d.primaryMode;
-      return d;
-    }
-  } catch (e) {}
-  return null;
+  let legs = [];
+  try { legs = JSON.parse(params.get("legs") || "[]"); } catch (e) {}
+
+  return {
+    legs,
+    mode: params.get("primaryMode") || params.get("mode") || "",
+    primaryMode: params.get("primaryMode") || params.get("mode") || "",
+    distanceKm: parseFloat(params.get("distanceKm")),
+    dailyKg: parseFloat(params.get("dailyKg")),
+    dangerLabel: params.get("dangerLabel"),
+    timestamp: params.get("timestamp"),
+  };
 }
 
 function showNoData() {
@@ -334,7 +314,12 @@ function populate(data) {
 
 // ---- Init ----
 document.addEventListener("DOMContentLoaded", () => {
-  const data = loadData();
+  // Show results only when arriving directly from a calculator submit (URL params present).
+  // Any refresh, back-navigation, or page-link visit lands here without params → blank state.
+  const navEntry = performance.getEntriesByType("navigation")[0];
+  const isReload = navEntry && navEntry.type === "reload";
+
+  const data = isReload ? null : loadData();
   if (!data) {
     showNoData();
     return;

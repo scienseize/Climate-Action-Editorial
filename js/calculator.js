@@ -259,8 +259,6 @@ function handleSubmit(e) {
     timestamp: new Date().toISOString(),
   };
 
-  localStorage.setItem("climateCalcResult", JSON.stringify(payload));
-
   const params = new URLSearchParams({
     legs: JSON.stringify(legs),
     primaryMode: payload.primaryMode,
@@ -276,9 +274,6 @@ function handleSubmit(e) {
 
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("legs-container");
-
-  // Clear any previous result so the form always starts blank on load/refresh
-  localStorage.removeItem("climateCalcResult");
 
   // Create one default leg row
   if (container) {

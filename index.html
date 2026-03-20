@@ -347,9 +347,11 @@
   </footer>
 
   <script>
+    history.scrollRestoration = 'manual';
     document.getElementById('mobile-menu-btn').addEventListener('click', () => {
       document.getElementById('mobile-menu').classList.toggle('hidden');
     });
+    window.addEventListener('load', () => window.scrollTo(0, 0));
   </script>
   <script>
     const observer = new IntersectionObserver(
