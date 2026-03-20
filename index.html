@@ -7,21 +7,30 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
-      theme: { extend: { colors: {
-        'primary':        '#2E7D32',
-        'primary-light':  '#43A047',
-        'primary-dark':   '#1B5E20',
-        'secondary':      '#D32F2F',
-        'secondary-light':'#EF5350',
-        'tertiary':       '#F57C00',
-        'tertiary-light': '#FFA726',
-        'neutral':        '#455A64',
-        'neutral-light':  '#78909C',
-      }}}
+      theme: { extend: {
+        colors: {
+          'primary':        '#2E7D32',
+          'primary-light':  '#43A047',
+          'primary-dark':   '#1B5E20',
+          'secondary':      '#D32F2F',
+          'secondary-light':'#EF5350',
+          'tertiary':       '#F57C00',
+          'tertiary-light': '#FFA726',
+          'neutral':        '#455A64',
+          'neutral-light':  '#78909C',
+        },
+        fontFamily: {
+          display: ['Fraunces', 'Georgia', 'serif'],
+          sans:    ['DM Sans', 'system-ui', 'sans-serif'],
+        },
+      }}
     }
   </script>
   <link rel="stylesheet" href="css/styles.css" />
   <link rel="icon" href="assets/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 </head>
 <body class="bg-white text-gray-900 font-sans">
 
@@ -81,7 +90,7 @@
         </span>
 
         <!-- Headline -->
-        <h1 class="text-5xl sm:text-6xl lg:text-7xl font-black text-gray-900 leading-tight mb-6">
+        <h1 class="font-display text-5xl sm:text-6xl lg:text-7xl font-black text-gray-900 leading-tight mb-6">
           The Vital Archive:<br/>
           Tracking Our
           <em class="not-italic text-primary block">Atmospheric<br/>Debt</em>
@@ -97,7 +106,7 @@
         <!-- CTAs -->
         <div class="flex flex-col sm:flex-row gap-4">
           <a href="calculator.html"
-             class="inline-flex items-center gap-2 px-7 py-4 bg-primary hover:bg-primary-dark text-white font-bold text-base rounded-lg transition-all hover:scale-105 shadow-md">
+             class="btn-primary-pulse inline-flex items-center gap-2 px-7 py-4 bg-primary hover:bg-primary-dark text-white font-bold text-base rounded-lg transition-all hover:scale-105 shadow-md">
             Calculate Your Footprint <span>→</span>
           </a>
           <a href="#impact"
@@ -117,20 +126,20 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-8">
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
 
-        <div class="stat-card text-center p-6 rounded-xl bg-white border border-gray-200 shadow-sm">
-          <p class="text-4xl font-black text-secondary mb-2">+13 mm/yr</p>
+        <div class="stat-card reveal text-center p-6 rounded-xl bg-white border border-gray-200 shadow-sm">
+          <p class="font-display text-4xl font-black text-secondary mb-2">+13 mm/yr</p>
           <p class="text-sm font-semibold text-gray-800 mb-1">Manila Bay Sea Level Rise</p>
           <p class="text-xs text-gray-500">nearly 4× the global average (NAMRIA, 2022)</p>
         </div>
 
-        <div class="stat-card text-center p-6 rounded-xl bg-white border border-gray-200 shadow-sm">
-          <p class="text-4xl font-black text-tertiary mb-2">20/yr</p>
+        <div class="stat-card reveal reveal-delay-1 text-center p-6 rounded-xl bg-white border border-gray-200 shadow-sm">
+          <p class="font-display text-4xl font-black text-tertiary mb-2">20/yr</p>
           <p class="text-sm font-semibold text-gray-800 mb-1">Typhoons Hit the Philippines</p>
           <p class="text-xs text-gray-500">most disaster-exposed nation on Earth (WRI, 2023)</p>
         </div>
 
-        <div class="stat-card text-center p-6 rounded-xl bg-white border border-gray-200 shadow-sm">
-          <p class="text-4xl font-black text-primary mb-2">1.44 t/yr</p>
+        <div class="stat-card reveal reveal-delay-2 text-center p-6 rounded-xl bg-white border border-gray-200 shadow-sm">
+          <p class="font-display text-4xl font-black text-primary mb-2">1.44 t/yr</p>
           <p class="text-sm font-semibold text-gray-800 mb-1">PH Per-Capita CO₂</p>
           <p class="text-xs text-gray-500">below SDG target — but transport is rising fast (PSA, 2022)</p>
         </div>
@@ -147,7 +156,7 @@
 
       <div class="text-center mb-14">
         <p class="text-xs font-bold tracking-widest text-primary uppercase mb-3">Climate Crisis</p>
-        <h2 class="text-3xl sm:text-4xl font-black text-gray-900 mb-4">We Are Approaching Tipping Points</h2>
+        <h2 class="font-display text-3xl sm:text-4xl font-black text-gray-900 mb-4">We Are Approaching Tipping Points</h2>
         <p class="text-gray-500 max-w-xl mx-auto">Critical climate thresholds that, once crossed, trigger self-reinforcing feedback loops with irreversible consequences.</p>
       </div>
 
@@ -255,7 +264,7 @@
         <!-- Content -->
         <div class="flex-1">
           <p class="text-xs font-bold tracking-widest text-primary uppercase mb-3">UN Sustainable Development Goal</p>
-          <h2 class="text-3xl sm:text-4xl font-black text-gray-900 mb-4">
+          <h2 class="font-display text-3xl sm:text-4xl font-black text-gray-900 mb-4">
             SDG 13: Take Urgent Action to Combat Climate Change
           </h2>
           <p class="text-gray-500 leading-relaxed mb-8">
@@ -265,19 +274,19 @@
           </p>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div class="p-5 rounded-xl bg-white border border-gray-200 shadow-sm">
+            <div class="reveal p-5 rounded-xl bg-white border border-gray-200 shadow-sm">
               <h4 class="font-bold text-primary mb-2">Target 13.1</h4>
               <p class="text-sm text-gray-600">Strengthen resilience and adaptive capacity to climate-related hazards and natural disasters.</p>
             </div>
-            <div class="p-5 rounded-xl bg-white border border-gray-200 shadow-sm">
+            <div class="reveal reveal-delay-1 p-5 rounded-xl bg-white border border-gray-200 shadow-sm">
               <h4 class="font-bold text-primary mb-2">Target 13.2</h4>
               <p class="text-sm text-gray-600">Integrate climate change measures into national policies, strategies and planning.</p>
             </div>
-            <div class="p-5 rounded-xl bg-white border border-gray-200 shadow-sm">
+            <div class="reveal reveal-delay-2 p-5 rounded-xl bg-white border border-gray-200 shadow-sm">
               <h4 class="font-bold text-primary mb-2">Target 13.3</h4>
               <p class="text-sm text-gray-600">Improve education, awareness-raising and capacity on climate change mitigation and adaptation.</p>
             </div>
-            <div class="p-5 rounded-xl bg-white border border-gray-200 shadow-sm">
+            <div class="reveal reveal-delay-3 p-5 rounded-xl bg-white border border-gray-200 shadow-sm">
               <h4 class="font-bold text-primary mb-2">Target 13.a</h4>
               <p class="text-sm text-gray-600">Mobilise $100 billion/yr to address the needs of developing countries in climate action.</p>
             </div>
@@ -293,7 +302,7 @@
   <section id="about" class="py-20 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-8 text-center">
       <p class="text-xs font-bold tracking-widest text-primary uppercase mb-3">About This Project</p>
-      <h2 class="text-3xl sm:text-4xl font-black text-gray-900 mb-6">Understand Your Personal Climate Impact</h2>
+      <h2 class="font-display text-3xl sm:text-4xl font-black text-gray-900 mb-6">Understand Your Personal Climate Impact</h2>
       <p class="text-gray-500 max-w-2xl mx-auto text-lg leading-relaxed mb-10">
         This tool calculates your commute-related carbon emissions, benchmarks them against the
         UN SDG 13 target, and provides personalised recommendations to reduce your footprint.
@@ -302,7 +311,7 @@
 
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
         <a href="calculator.html"
-           class="px-8 py-4 bg-primary hover:bg-primary-dark text-white font-bold text-lg rounded-lg transition-all hover:scale-105 shadow-md">
+           class="btn-primary-pulse px-8 py-4 bg-primary hover:bg-primary-dark text-white font-bold text-lg rounded-lg transition-all hover:scale-105 shadow-md">
           Start Your Carbon Audit →
         </a>
         <a href="#stats"
@@ -341,6 +350,13 @@
     document.getElementById('mobile-menu-btn').addEventListener('click', () => {
       document.getElementById('mobile-menu').classList.toggle('hidden');
     });
+  </script>
+  <script>
+    const observer = new IntersectionObserver(
+      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      { threshold: 0.15 }
+    );
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   </script>
 </body>
 </html>

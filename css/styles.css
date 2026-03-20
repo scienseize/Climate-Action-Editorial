@@ -9,11 +9,24 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to right,
-      rgba(255, 255, 255, 0.96) 0%,
-      rgba(255, 255, 255, 0.85) 38%,
-      rgba(255, 255, 255, 0.35) 62%,
-      transparent 80%);
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 255, 255, 0.88) 35%,
+    rgba(255, 255, 255, 0.30) 60%,
+    transparent 78%
+  );
+}
+
+@media (max-width: 768px) {
+  .hero-photo::before {
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.97) 0%,
+      rgba(255, 255, 255, 0.85) 60%,
+      rgba(255, 255, 255, 0.60) 100%
+    );
+  }
 }
 
 /* ---------- Nav active state ---------- */
@@ -58,6 +71,13 @@
   border-color: #2e7d32;
   background-color: rgba(46, 125, 50, 0.08);
   box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.15);
+}
+
+/* ---------- Typography ---------- */
+body { font-family: 'DM Sans', system-ui, sans-serif; }
+
+h1, h2, .display-font {
+  font-family: 'Fraunces', Georgia, serif;
 }
 
 /* ---------- Smooth page fade-in ---------- */
@@ -266,6 +286,50 @@ body {
   background-color: rgba(255, 255, 255, 0.12);
   color: rgba(255, 255, 255, 0.85);
   font-size: 0.65rem;
+}
+
+/* ---------- Scroll Reveal ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+/* ---------- Leg Row ---------- */
+.leg-row {
+  background: #ffffff;
+  border: 2px solid #e5e7eb;
+  border-radius: 0.75rem;
+  padding: 0.625rem 0.875rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.leg-row:focus-within {
+  border-color: #2e7d32;
+  box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.10);
+}
+
+/* ---------- Button Pulse (primary CTA) ---------- */
+.btn-primary-pulse {
+  position: relative;
+  overflow: hidden;
+}
+.btn-primary-pulse::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.15);
+  transform: translateX(-100%);
+  transition: transform 0.4s ease;
+}
+.btn-primary-pulse:hover::after {
+  transform: translateX(0);
 }
 
 /* ---------- Scrollbar ---------- */
