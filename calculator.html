@@ -205,6 +205,28 @@
               </button>
             </div>
 
+            <!-- Step 2: Name (required) -->
+            <div class="mb-8">
+              <label
+                for="user-name"
+                class="block text-lg font-bold text-gray-900 mb-1"
+              >
+                <span class="text-primary mr-2">02</span>Your Name
+              </label>
+              <p class="text-sm text-gray-500 mb-3">
+                Used to personalise your results report.
+              </p>
+              <input
+                type="text"
+                id="user-name"
+                name="user-name"
+                required
+                maxlength="60"
+                placeholder="e.g. Juan dela Cruz"
+                class="w-full bg-white border-2 border-gray-200 focus:border-primary focus:outline-none text-gray-900 rounded-xl px-4 py-3 text-lg transition-colors"
+              />
+            </div>
+
             <!-- Submit -->
             <button
               type="submit"
@@ -255,7 +277,7 @@
               <p
                 id="lp-danger"
                 class="text-2xl font-black"
-                style="color: #9ca3af"
+                data-level="none"
               >
                 —
               </p>
@@ -325,7 +347,7 @@
             >Results</a
           >
         </div>
-        <p class="text-xs text-white/50">&copy; 2025 Bill Alcantara</p>
+        <p class="text-xs text-white/50">&copy; Bill Alcantara</p>
       </div>
     </footer>
 

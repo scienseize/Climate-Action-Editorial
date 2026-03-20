@@ -10,6 +10,7 @@ function loadData() {
   try { legs = JSON.parse(params.get("legs") || "[]"); } catch (e) {}
 
   return {
+    name: params.get("name") || "",
     legs,
     mode: params.get("primaryMode") || params.get("mode") || "",
     primaryMode: params.get("primaryMode") || params.get("mode") || "",
@@ -266,6 +267,12 @@ function populate(data) {
     badgeEl.setAttribute("data-level", level);
   }
 
+  // Personalise headline with name
+  const headlineEl = document.getElementById("res-headline");
+  if (headlineEl && data.name) {
+    headlineEl.innerHTML = `${data.name}'s Commute<br />Carbon Legacy.`;
+  }
+
   // Context line (hero subtitle)
   const ctxEl = document.getElementById("res-context");
   if (ctxEl) {
@@ -279,7 +286,8 @@ function populate(data) {
       diff > 0
         ? "your footprint significantly exceeds sustainable SDG thresholds."
         : "your footprint is within sustainable SDG thresholds.";
-    ctxEl.textContent = `Based on your daily ${dist}-km commute via ${commuteDesc}, ${suffix}`;
+    const greeting = data.name ? `${data.name}, based on` : "Based on";
+    ctxEl.textContent = `${greeting} your daily ${dist}-km commute via ${commuteDesc}, ${suffix}`;
   }
 
   // Emission summary (urgency card italic)

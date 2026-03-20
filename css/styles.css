@@ -332,6 +332,17 @@ body {
   transform: translateX(0);
 }
 
+/* ---------- SDG Badge ---------- */
+.sdg-urgent-badge {
+  background-color: #92400e;
+}
+
+/* ---------- Static comparison bars (index.html impact section) ---------- */
+.bar-full { width: 100%; }
+.bar-47   { width: 47%; }
+.bar-38   { width: 38%; }
+.bar-31   { width: 31%; }
+
 /* ---------- Scrollbar ---------- */
 ::-webkit-scrollbar {
   width: 8px;

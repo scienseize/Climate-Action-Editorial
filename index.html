@@ -76,6 +76,7 @@
     </div>
   </header>
 
+  <main>
   <!-- ============================================================
        HERO — photo background, left-aligned content
   ============================================================ -->
@@ -84,8 +85,7 @@
       <div class="max-w-xl">
 
         <!-- Badge -->
-        <span class="inline-block px-3 py-1.5 mb-6 text-xs font-bold tracking-widest uppercase text-white rounded"
-              style="background-color: #92400E;">
+        <span class="sdg-urgent-badge inline-block px-3 py-1.5 mb-6 text-xs font-bold tracking-widest uppercase text-white rounded">
           SDG 13: Urgent Action Required
         </span>
 
@@ -126,23 +126,23 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-8">
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
 
-        <div class="stat-card reveal text-center p-6 rounded-xl bg-white border border-gray-200 shadow-sm">
+        <article class="stat-card reveal text-center p-6 rounded-xl bg-white border border-gray-200 shadow-sm">
           <p class="font-display text-4xl font-black text-secondary mb-2">+13 mm/yr</p>
           <p class="text-sm font-semibold text-gray-800 mb-1">Manila Bay Sea Level Rise</p>
           <p class="text-xs text-gray-500">nearly 4× the global average (NAMRIA, 2022)</p>
-        </div>
+        </article>
 
-        <div class="stat-card reveal reveal-delay-1 text-center p-6 rounded-xl bg-white border border-gray-200 shadow-sm">
+        <article class="stat-card reveal reveal-delay-1 text-center p-6 rounded-xl bg-white border border-gray-200 shadow-sm">
           <p class="font-display text-4xl font-black text-tertiary mb-2">20/yr</p>
           <p class="text-sm font-semibold text-gray-800 mb-1">Typhoons Hit the Philippines</p>
           <p class="text-xs text-gray-500">most disaster-exposed nation on Earth (WRI, 2023)</p>
-        </div>
+        </article>
 
-        <div class="stat-card reveal reveal-delay-2 text-center p-6 rounded-xl bg-white border border-gray-200 shadow-sm">
+        <article class="stat-card reveal reveal-delay-2 text-center p-6 rounded-xl bg-white border border-gray-200 shadow-sm">
           <p class="font-display text-4xl font-black text-primary mb-2">1.44 t/yr</p>
           <p class="text-sm font-semibold text-gray-800 mb-1">PH Per-Capita CO₂</p>
           <p class="text-xs text-gray-500">below SDG target — but transport is rising fast (PSA, 2022)</p>
-        </div>
+        </article>
 
       </div>
     </div>
@@ -163,7 +163,7 @@
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
 
         <!-- Tipping point card -->
-        <div class="rounded-2xl border border-red-200 bg-red-50 p-8">
+        <article class="rounded-2xl border border-red-200 bg-red-50 p-8">
           <div class="flex items-start gap-4 mb-6">
             <span class="text-3xl">⚠️</span>
             <div>
@@ -189,10 +189,10 @@
               <span class="text-xs px-2 py-1 rounded-full bg-tertiary text-white font-semibold">3°C+</span>
             </li>
           </ul>
-        </div>
+        </article>
 
         <!-- Emissions progress -->
-        <div class="rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
+        <article class="rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
           <div class="flex items-start gap-4 mb-6">
             <span class="text-3xl">📊</span>
             <div>
@@ -208,7 +208,7 @@
                 <span class="text-tertiary font-bold">261% of target</span>
               </div>
               <div class="h-3 bg-gray-100 rounded-full overflow-hidden">
-                <div class="h-full rounded-full bg-tertiary" style="width: 100%"></div>
+                <div class="h-full rounded-full bg-tertiary bar-full"></div>
               </div>
             </div>
             <div>
@@ -217,7 +217,7 @@
                 <span class="text-secondary font-bold">122% of target</span>
               </div>
               <div class="h-3 bg-gray-100 rounded-full overflow-hidden">
-                <div class="h-full rounded-full bg-secondary" style="width: 47%"></div>
+                <div class="h-full rounded-full bg-secondary bar-47"></div>
               </div>
             </div>
             <div>
@@ -226,7 +226,7 @@
                 <span class="text-primary font-bold">Goal</span>
               </div>
               <div class="h-3 bg-gray-100 rounded-full overflow-hidden">
-                <div class="h-full rounded-full bg-primary" style="width: 38%"></div>
+                <div class="h-full rounded-full bg-primary bar-38"></div>
               </div>
             </div>
             <div>
@@ -235,12 +235,12 @@
                 <span class="text-primary font-bold">Below target</span>
               </div>
               <div class="h-3 bg-gray-100 rounded-full overflow-hidden">
-                <div class="h-full rounded-full bg-primary-light" style="width: 31%"></div>
+                <div class="h-full rounded-full bg-primary-light bar-31"></div>
               </div>
             </div>
           </div>
           <p class="text-xs text-gray-400 mt-6">Sources: PSA, DENR, PAGASA, IEA, UN SDG Report 2023</p>
-        </div>
+        </article>
       </div>
     </div>
   </section>
@@ -322,6 +322,8 @@
     </div>
   </section>
 
+  </main>
+
   <!-- ============================================================
        FOOTER
   ============================================================ -->
@@ -340,7 +342,7 @@
           <a href="#about"           class="text-sm text-white/70 hover:text-white transition-colors">About</a>
         </nav>
         <p class="text-xs text-white/50 text-center sm:text-right">
-          &copy; 2025 Bill Alcantara<br/>INTROWEB Final Project
+          &copy; Bill Alcantara<br/>INTROWEB Final Project
         </p>
       </div>
     </div>

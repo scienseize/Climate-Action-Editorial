@@ -203,8 +203,10 @@ function updateLivePanel() {
 
 function validateForm() {
   const legs = getLegs();
+  const name = document.getElementById("user-name")?.value.trim();
   const errors = [];
 
+  if (!name) errors.push("Please enter your name.");
   const validLegs = legs.filter((l) => l.mode && l.distanceKm > 0);
   if (validLegs.length === 0)
     errors.push(
@@ -235,6 +237,7 @@ function handleSubmit(e) {
   if (errors.length > 0) return;
 
   const legs = getLegs().filter((l) => l.mode && l.distanceKm > 0);
+  const name = document.getElementById("user-name").value.trim();
 
   const dailyKg = legs.reduce(
     (s, l) => s + EMISSION_FACTORS[l.mode] * l.distanceKm * 2,
@@ -251,6 +254,7 @@ function handleSubmit(e) {
   );
 
   const payload = {
+    name,
     legs,
     primaryMode: primaryLeg.mode,
     distanceKm: legs.reduce((s, l) => s + l.distanceKm, 0),
@@ -260,6 +264,7 @@ function handleSubmit(e) {
   };
 
   const params = new URLSearchParams({
+    name: payload.name,
     legs: JSON.stringify(legs),
     primaryMode: payload.primaryMode,
     distanceKm: payload.distanceKm,

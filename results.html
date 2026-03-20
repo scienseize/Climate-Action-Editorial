@@ -34,7 +34,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
   </head>
-  <body class="bg-slate-50 text-gray-900 font-sans min-h-screen">
+  <body class="bg-slate-50 text-gray-900 font-sans min-h-screen flex flex-col">
     <!-- ============================================================
        HEADER
   ============================================================ -->
@@ -139,10 +139,11 @@
       </div>
     </header>
 
+    <main class="flex-1 flex flex-col">
     <!-- ============================================================
        NO-DATA STATE — shown when localStorage is empty
   ============================================================ -->
-    <section id="no-data-state" class="hidden bg-white pt-16">
+    <section id="no-data-state" class="hidden bg-white pt-16 flex-1">
       <div class="max-w-7xl mx-auto px-4 sm:px-8 py-32 text-center">
         <p class="text-xs font-bold tracking-widest uppercase text-gray-400 mb-6">No Results Yet</p>
         <h1 class="text-4xl sm:text-5xl font-black text-gray-900 mb-6">Nothing to show here.</h1>
@@ -171,6 +172,7 @@
             Personal Impact Report
           </p>
           <h1
+            id="res-headline"
             class="font-display text-5xl sm:text-6xl lg:text-7xl font-black text-gray-900 leading-none mb-6"
           >
             Your Commute<br />Carbon Legacy.
@@ -369,6 +371,7 @@
       </a>
     </section>
     </div><!-- /#results-body -->
+    </main>
 
     <!-- ============================================================
        FOOTER
@@ -391,7 +394,7 @@
             >Results</a
           >
         </div>
-        <p class="text-xs text-white/50">&copy; 2025 Bill Alcantara</p>
+        <p class="text-xs text-white/50">&copy; Bill Alcantara</p>
       </div>
     </footer>
 
