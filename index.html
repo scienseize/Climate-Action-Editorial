@@ -1,578 +1,372 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The Vital Archive — SDG 13 Climate Action</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              "sdg-green": "#3F7E44",
-              "sdg-dark": "#0d1f0d",
-            },
-          },
-        },
-      };
-    </script>
-    <link rel="stylesheet" href="css/styles.css" />
-  </head>
-  <body class="bg-gray-950 text-gray-100 font-sans">
-    <!-- ============================================================
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Vital Archive — SDG 13 Climate Action</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: { colors: {
+        'primary':        '#2E7D32',
+        'primary-light':  '#43A047',
+        'primary-dark':   '#1B5E20',
+        'secondary':      '#D32F2F',
+        'secondary-light':'#EF5350',
+        'tertiary':       '#F57C00',
+        'tertiary-light': '#FFA726',
+        'neutral':        '#455A64',
+        'neutral-light':  '#78909C',
+      }}}
+    }
+  </script>
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    /* Hero photo + left-to-right fade overlay */
+    .hero-photo {
+      background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1920&q=80');
+      background-size: cover;
+      background-position: center 40%;
+    }
+    .hero-photo::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(255,255,255,0.96) 0%,
+        rgba(255,255,255,0.85) 38%,
+        rgba(255,255,255,0.35) 62%,
+        transparent 80%
+      );
+    }
+    /* Nav link active underline */
+    .nav-active {
+      color: #2E7D32;
+      border-bottom: 2px solid #2E7D32;
+      padding-bottom: 2px;
+    }
+  </style>
+</head>
+<body class="bg-white text-gray-900 font-sans">
+
+  <!-- ============================================================
        HEADER / NAV
   ============================================================ -->
-    <header
-      class="fixed top-0 left-0 right-0 z-50 bg-gray-950/90 backdrop-blur border-b border-gray-800"
-    >
-      <div
-        class="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16"
-      >
-        <!-- Logo -->
-        <a href="index.html" class="flex items-center gap-2 group">
-          <span class="text-2xl font-black text-green-400 leading-none"
-            >13</span
-          >
-          <div>
-            <p
-              class="text-xs font-bold text-green-500 leading-tight tracking-widest uppercase"
-            >
-              SDG
-            </p>
-            <p class="text-sm font-semibold text-white leading-tight">
-              Climate Action
-            </p>
-          </div>
+  <header class="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 flex items-center justify-between h-16">
+
+      <!-- Logo -->
+      <a href="index.html" class="text-xl font-black text-gray-900 tracking-tight">
+        Climate Action Editorial
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-8">
+        <a href="#impact"    class="nav-active text-sm font-medium transition-colors">Impact</a>
+        <a href="#sdg-goals" class="nav-link text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">SDG Goals</a>
+        <a href="#about"     class="nav-link text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">About</a>
+        <a href="calculator.html" class="nav-link text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Calculator</a>
+        <a href="calculator.html"
+           class="ml-4 px-5 py-2.5 bg-primary hover:bg-primary-dark text-white text-sm font-bold rounded-lg transition-colors shadow-sm">
+          Take Action
         </a>
+      </nav>
 
-        <!-- Desktop Nav -->
-        <nav class="hidden md:flex items-center gap-6">
-          <a
-            href="#impact"
-            class="nav-link text-sm text-gray-300 hover:text-white transition-colors"
-            >Impact</a
-          >
-          <a
-            href="#sdg-goals"
-            class="nav-link text-sm text-gray-300 hover:text-white transition-colors"
-            >SDG Goals</a
-          >
-          <a
-            href="#about"
-            class="nav-link text-sm text-gray-300 hover:text-white transition-colors"
-            >About</a
-          >
-          <a
-            href="calculator.html"
-            class="nav-link text-sm text-gray-300 hover:text-white transition-colors"
-            >Calculator</a
-          >
-          <a
-            href="calculator.html"
-            class="ml-2 px-4 py-2 bg-green-600 hover:bg-green-500 text-white text-sm font-semibold rounded-lg transition-colors"
-          >
-            Take Action
-          </a>
-        </nav>
+      <!-- Mobile hamburger -->
+      <button id="mobile-menu-btn" class="md:hidden p-2 text-gray-600 hover:text-gray-900" aria-label="Open menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
 
-        <!-- Mobile hamburger -->
-        <button
-          id="mobile-menu-btn"
-          class="md:hidden p-2 text-gray-400 hover:text-white"
-          aria-label="Open menu"
-        >
-          <svg
-            class="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4 6h16M4 12h16M4 18h16"
-            />
-          </svg>
-        </button>
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden md:hidden border-t border-gray-200 bg-white">
+      <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-3">
+        <a href="#impact"    class="text-sm font-medium text-primary py-2">Impact</a>
+        <a href="#sdg-goals" class="text-sm font-medium text-gray-600 hover:text-gray-900 py-2">SDG Goals</a>
+        <a href="#about"     class="text-sm font-medium text-gray-600 hover:text-gray-900 py-2">About</a>
+        <a href="calculator.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 py-2">Calculator</a>
+        <a href="calculator.html" class="px-4 py-2 bg-primary text-white text-sm font-bold rounded-lg text-center">Take Action</a>
       </div>
+    </div>
+  </header>
 
-      <!-- Mobile menu -->
-      <div
-        id="mobile-menu"
-        class="hidden md:hidden border-t border-gray-800 bg-gray-950"
-      >
-        <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col gap-3">
-          <a href="#impact" class="text-sm text-gray-300 hover:text-white py-2"
-            >Impact</a
-          >
-          <a
-            href="#sdg-goals"
-            class="text-sm text-gray-300 hover:text-white py-2"
-            >SDG Goals</a
-          >
-          <a href="#about" class="text-sm text-gray-300 hover:text-white py-2"
-            >About</a
-          >
-          <a
-            href="calculator.html"
-            class="text-sm text-gray-300 hover:text-white py-2"
-            >Calculator</a
-          >
-          <a
-            href="calculator.html"
-            class="px-4 py-2 bg-green-600 text-white text-sm font-semibold rounded-lg text-center"
-            >Take Action</a
-          >
-        </div>
-      </div>
-    </header>
-
-    <!-- ============================================================
-       HERO
+  <!-- ============================================================
+       HERO — photo background, left-aligned content
   ============================================================ -->
-    <section class="hero-bg min-h-screen flex items-center pt-16">
-      <div
-        class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-24 text-center"
-      >
-        <!-- SDG Badge -->
-        <div
-          class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-green-800 bg-green-950/60 mb-8"
-        >
-          <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
-          <span
-            class="text-xs font-semibold text-green-400 tracking-widest uppercase"
-            >United Nations SDG 13</span
-          >
-        </div>
+  <section class="hero-photo relative min-h-screen flex items-center pt-16">
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 py-24 w-full">
+      <div class="max-w-xl">
 
-        <h1
-          class="text-4xl sm:text-6xl lg:text-7xl font-black text-white leading-tight mb-6"
-        >
-          The Vital Archive:<br />
-          <span class="text-green-400">Tracking Our</span><br />
-          Atmospheric Debt
+        <!-- Badge -->
+        <span class="inline-block px-3 py-1.5 mb-6 text-xs font-bold tracking-widest uppercase text-white rounded"
+              style="background-color: #92400E;">
+          SDG 13: Urgent Action Required
+        </span>
+
+        <!-- Headline -->
+        <h1 class="text-5xl sm:text-6xl lg:text-7xl font-black text-gray-900 leading-tight mb-6">
+          The Vital Archive:<br/>
+          Tracking Our
+          <em class="not-italic text-primary block">Atmospheric<br/>Debt</em>
         </h1>
 
-        <p
-          class="max-w-2xl mx-auto text-lg sm:text-xl text-gray-300 leading-relaxed mb-10"
-        >
-          Every kilometre driven, every flight taken, every choice made — it
-          compounds. Understand your personal carbon footprint and take
-          meaningful climate action today.
+        <!-- Subtitle -->
+        <p class="text-lg text-gray-700 leading-relaxed mb-10 max-w-md">
+          The era of global boiling has arrived. Our climate is shifting faster than
+          our policies. It is time for precise, individual accountability and
+          collective structural change.
         </p>
 
-        <div
-          class="flex flex-col sm:flex-row items-center justify-center gap-4"
-        >
-          <a
-            href="calculator.html"
-            class="px-8 py-4 bg-green-600 hover:bg-green-500 text-white font-bold text-lg rounded-xl transition-all hover:scale-105 shadow-lg shadow-green-900/40"
-          >
-            Calculate Your Footprint →
+        <!-- CTAs -->
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="calculator.html"
+             class="inline-flex items-center gap-2 px-7 py-4 bg-primary hover:bg-primary-dark text-white font-bold text-base rounded-lg transition-all hover:scale-105 shadow-md">
+            Calculate Your Footprint <span>→</span>
           </a>
-          <a
-            href="#impact"
-            class="px-8 py-4 bg-transparent border border-gray-600 hover:border-green-600 text-gray-200 hover:text-white font-semibold text-lg rounded-xl transition-all"
-          >
+          <a href="#impact"
+             class="inline-flex items-center justify-center px-7 py-4 bg-white/80 hover:bg-white border border-gray-300 hover:border-gray-400 text-gray-800 font-semibold text-base rounded-lg transition-all backdrop-blur-sm">
             Explore the Data
           </a>
         </div>
 
-        <!-- Scroll indicator -->
-        <div class="mt-20 flex justify-center">
-          <a
-            href="#stats"
-            class="text-gray-600 hover:text-green-400 transition-colors animate-bounce"
-          >
-            <svg
-              class="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M19 9l-7 7-7-7"
-              />
-            </svg>
-          </a>
-        </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ============================================================
+  <!-- ============================================================
        STATS STRIP
   ============================================================ -->
-    <section id="stats" class="bg-gray-900 border-y border-gray-800 py-12">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6">
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          <div
-            class="stat-card text-center p-6 rounded-xl bg-gray-800 border border-gray-700"
-          >
-            <p class="text-4xl font-black text-red-400 mb-2">+1.2°C</p>
-            <p class="text-sm font-semibold text-gray-200 mb-1">
-              Global Temperature Rise
-            </p>
-            <p class="text-xs text-gray-500">
-              above pre-industrial levels (2023)
-            </p>
-          </div>
+  <section id="stats" class="bg-gray-50 border-y border-gray-200 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
 
-          <div
-            class="stat-card text-center p-6 rounded-xl bg-gray-800 border border-gray-700"
-          >
-            <p class="text-4xl font-black text-yellow-400 mb-2">421 ppm</p>
-            <p class="text-sm font-semibold text-gray-200 mb-1">
-              Atmospheric CO₂
-            </p>
-            <p class="text-xs text-gray-500">highest in 3 million years</p>
-          </div>
-
-          <div
-            class="stat-card text-center p-6 rounded-xl bg-gray-800 border border-gray-700"
-          >
-            <p class="text-4xl font-black text-green-400 mb-2">1.8 t/yr</p>
-            <p class="text-sm font-semibold text-gray-200 mb-1">
-              SDG 13 Target
-            </p>
-            <p class="text-xs text-gray-500">
-              per person carbon budget by 2030
-            </p>
-          </div>
+        <div class="stat-card text-center p-6 rounded-xl bg-white border border-gray-200 shadow-sm">
+          <p class="text-4xl font-black text-secondary mb-2">+1.2°C</p>
+          <p class="text-sm font-semibold text-gray-800 mb-1">Global Temperature Rise</p>
+          <p class="text-xs text-gray-500">above pre-industrial levels (2023)</p>
         </div>
-      </div>
-    </section>
 
-    <!-- ============================================================
+        <div class="stat-card text-center p-6 rounded-xl bg-white border border-gray-200 shadow-sm">
+          <p class="text-4xl font-black text-tertiary mb-2">421 ppm</p>
+          <p class="text-sm font-semibold text-gray-800 mb-1">Atmospheric CO₂</p>
+          <p class="text-xs text-gray-500">highest in 3 million years</p>
+        </div>
+
+        <div class="stat-card text-center p-6 rounded-xl bg-white border border-gray-200 shadow-sm">
+          <p class="text-4xl font-black text-primary mb-2">1.8 t/yr</p>
+          <p class="text-sm font-semibold text-gray-800 mb-1">SDG 13 Target</p>
+          <p class="text-xs text-gray-500">per person carbon budget by 2030</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
        IMPACT — Climate Data
   ============================================================ -->
-    <section id="impact" class="py-20 bg-gray-950">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6">
-        <div class="text-center mb-14">
-          <p
-            class="text-xs font-semibold tracking-widest text-green-500 uppercase mb-3"
-          >
-            Climate Crisis
-          </p>
-          <h2 class="text-3xl sm:text-4xl font-black text-white mb-4">
-            We Are Approaching Tipping Points
-          </h2>
-          <p class="text-gray-400 max-w-xl mx-auto">
-            Critical climate thresholds that, once crossed, trigger
-            self-reinforcing feedback loops with irreversible consequences.
-          </p>
+  <section id="impact" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8">
+
+      <div class="text-center mb-14">
+        <p class="text-xs font-bold tracking-widest text-primary uppercase mb-3">Climate Crisis</p>
+        <h2 class="text-3xl sm:text-4xl font-black text-gray-900 mb-4">We Are Approaching Tipping Points</h2>
+        <p class="text-gray-500 max-w-xl mx-auto">Critical climate thresholds that, once crossed, trigger self-reinforcing feedback loops with irreversible consequences.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+
+        <!-- Tipping point card -->
+        <div class="rounded-2xl border border-red-200 bg-red-50 p-8">
+          <div class="flex items-start gap-4 mb-6">
+            <span class="text-3xl">⚠️</span>
+            <div>
+              <h3 class="text-xl font-bold text-secondary mb-1">Critical Tipping Points</h3>
+              <p class="text-sm text-gray-500">Systems that could collapse within this century</p>
+            </div>
+          </div>
+          <ul class="space-y-4">
+            <li class="flex items-center justify-between py-3 border-b border-red-200">
+              <span class="text-sm text-gray-700">West Antarctic Ice Sheet Collapse</span>
+              <span class="text-xs px-2 py-1 rounded-full bg-secondary text-white font-semibold">1.5°C threshold</span>
+            </li>
+            <li class="flex items-center justify-between py-3 border-b border-red-200">
+              <span class="text-sm text-gray-700">Greenland Ice Sheet Loss</span>
+              <span class="text-xs px-2 py-1 rounded-full bg-secondary text-white font-semibold">1.5–2°C</span>
+            </li>
+            <li class="flex items-center justify-between py-3 border-b border-red-200">
+              <span class="text-sm text-gray-700">Amazon Dieback (Savannafication)</span>
+              <span class="text-xs px-2 py-1 rounded-full bg-tertiary text-white font-semibold">3–4°C</span>
+            </li>
+            <li class="flex items-center justify-between py-3">
+              <span class="text-sm text-gray-700">Atlantic Circulation Collapse (AMOC)</span>
+              <span class="text-xs px-2 py-1 rounded-full bg-tertiary text-white font-semibold">4°C+</span>
+            </li>
+          </ul>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-          <!-- Tipping point card (red) -->
-          <div class="rounded-2xl border border-red-900 bg-red-950/30 p-8">
-            <div class="flex items-start gap-4 mb-6">
-              <span class="text-3xl">⚠️</span>
-              <div>
-                <h3 class="text-xl font-bold text-red-300 mb-1">
-                  Critical Tipping Points
-                </h3>
-                <p class="text-sm text-gray-400">
-                  Systems that could collapse within this century
-                </p>
-              </div>
+        <!-- Emissions progress -->
+        <div class="rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
+          <div class="flex items-start gap-4 mb-6">
+            <span class="text-3xl">📊</span>
+            <div>
+              <h3 class="text-xl font-bold text-gray-900 mb-1">Emissions vs. SDG Target</h3>
+              <p class="text-sm text-gray-500">Global average vs. 1.8 t/yr per-person target</p>
             </div>
-            <ul class="space-y-4">
-              <li
-                class="flex items-center justify-between py-3 border-b border-red-900/50"
-              >
-                <span class="text-sm text-gray-300"
-                  >West Antarctic Ice Sheet Collapse</span
-                >
-                <span
-                  class="text-xs px-2 py-1 rounded-full bg-red-900/60 text-red-400 font-semibold"
-                  >1.5°C threshold</span
-                >
-              </li>
-              <li
-                class="flex items-center justify-between py-3 border-b border-red-900/50"
-              >
-                <span class="text-sm text-gray-300"
-                  >Greenland Ice Sheet Loss</span
-                >
-                <span
-                  class="text-xs px-2 py-1 rounded-full bg-red-900/60 text-red-400 font-semibold"
-                  >1.5–2°C</span
-                >
-              </li>
-              <li
-                class="flex items-center justify-between py-3 border-b border-red-900/50"
-              >
-                <span class="text-sm text-gray-300"
-                  >Amazon Dieback (Savannafication)</span
-                >
-                <span
-                  class="text-xs px-2 py-1 rounded-full bg-orange-900/60 text-orange-400 font-semibold"
-                  >3–4°C</span
-                >
-              </li>
-              <li class="flex items-center justify-between py-3">
-                <span class="text-sm text-gray-300"
-                  >Atlantic Circulation Collapse (AMOC)</span
-                >
-                <span
-                  class="text-xs px-2 py-1 rounded-full bg-orange-900/60 text-orange-400 font-semibold"
-                  >4°C+</span
-                >
-              </li>
-            </ul>
           </div>
 
-          <!-- Emissions progress -->
-          <div class="rounded-2xl border border-gray-700 bg-gray-800/50 p-8">
-            <div class="flex items-start gap-4 mb-6">
-              <span class="text-3xl">📊</span>
-              <div>
-                <h3 class="text-xl font-bold text-white mb-1">
-                  Emissions vs. SDG Target
-                </h3>
-                <p class="text-sm text-gray-400">
-                  Global average vs. 1.8 t/yr per-person target
-                </p>
+          <div class="space-y-5">
+            <div>
+              <div class="flex justify-between text-sm mb-2">
+                <span class="text-gray-600">World Average (4.7 t/yr)</span>
+                <span class="text-tertiary font-bold">261%</span>
+              </div>
+              <div class="h-3 bg-gray-100 rounded-full overflow-hidden">
+                <div class="h-full rounded-full bg-tertiary" style="width: 100%"></div>
               </div>
             </div>
-
-            <div class="space-y-5">
-              <div>
-                <div class="flex justify-between text-sm mb-2">
-                  <span class="text-gray-300">World Average (4.7 t/yr)</span>
-                  <span class="text-yellow-400 font-semibold">261%</span>
-                </div>
-                <div class="h-3 bg-gray-700 rounded-full overflow-hidden">
-                  <div
-                    class="h-full rounded-full bg-yellow-500"
-                    style="width: 100%"
-                  ></div>
-                </div>
+            <div>
+              <div class="flex justify-between text-sm mb-2">
+                <span class="text-gray-600">USA Average (14.4 t/yr)</span>
+                <span class="text-secondary font-bold">800%</span>
               </div>
-              <div>
-                <div class="flex justify-between text-sm mb-2">
-                  <span class="text-gray-300">USA Average (14.4 t/yr)</span>
-                  <span class="text-red-400 font-semibold">800%</span>
-                </div>
-                <div class="h-3 bg-gray-700 rounded-full overflow-hidden">
-                  <div
-                    class="h-full rounded-full bg-red-500"
-                    style="width: 100%"
-                  ></div>
-                </div>
-              </div>
-              <div>
-                <div class="flex justify-between text-sm mb-2">
-                  <span class="text-gray-300">SDG 13 Target (1.8 t/yr)</span>
-                  <span class="text-green-400 font-semibold">Goal</span>
-                </div>
-                <div class="h-3 bg-gray-700 rounded-full overflow-hidden">
-                  <div
-                    class="h-full rounded-full bg-green-500"
-                    style="width: 38%"
-                  ></div>
-                </div>
-              </div>
-              <div>
-                <div class="flex justify-between text-sm mb-2">
-                  <span class="text-gray-300">India Average (1.9 t/yr)</span>
-                  <span class="text-green-400 font-semibold">~Target</span>
-                </div>
-                <div class="h-3 bg-gray-700 rounded-full overflow-hidden">
-                  <div
-                    class="h-full rounded-full bg-green-600"
-                    style="width: 40%"
-                  ></div>
-                </div>
+              <div class="h-3 bg-gray-100 rounded-full overflow-hidden">
+                <div class="h-full rounded-full bg-secondary" style="width: 100%"></div>
               </div>
             </div>
-
-            <p class="text-xs text-gray-500 mt-6">
-              Sources: IEA, IPCC AR6, UN SDG Report 2023
-            </p>
+            <div>
+              <div class="flex justify-between text-sm mb-2">
+                <span class="text-gray-600">SDG 13 Target (1.8 t/yr)</span>
+                <span class="text-primary font-bold">Goal</span>
+              </div>
+              <div class="h-3 bg-gray-100 rounded-full overflow-hidden">
+                <div class="h-full rounded-full bg-primary" style="width: 38%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-2">
+                <span class="text-gray-600">India Average (1.9 t/yr)</span>
+                <span class="text-primary font-bold">~Target</span>
+              </div>
+              <div class="h-3 bg-gray-100 rounded-full overflow-hidden">
+                <div class="h-full rounded-full bg-primary-light" style="width: 40%"></div>
+              </div>
+            </div>
           </div>
+          <p class="text-xs text-gray-400 mt-6">Sources: IEA, IPCC AR6, UN SDG Report 2023</p>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ============================================================
+  <!-- ============================================================
        SDG GOALS INFO
   ============================================================ -->
-    <section id="sdg-goals" class="py-20 bg-gray-900">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6">
-        <div class="flex flex-col lg:flex-row items-start gap-12">
-          <!-- SDG 13 badge -->
-          <div class="flex-shrink-0">
-            <div
-              class="w-48 h-48 rounded-2xl flex flex-col items-center justify-center border-4 border-green-600 bg-green-950 shadow-2xl shadow-green-900/40"
-            >
-              <span class="text-7xl font-black text-white leading-none"
-                >13</span
-              >
-              <span
-                class="text-xs font-bold tracking-widest text-green-400 uppercase mt-1"
-                >SDG</span
-              >
-              <span class="text-xs text-green-300 mt-0.5">Climate Action</span>
-            </div>
+  <section id="sdg-goals" class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8">
+      <div class="flex flex-col lg:flex-row items-start gap-12">
+
+        <!-- SDG 13 badge -->
+        <div class="flex-shrink-0">
+          <div class="w-48 h-48 rounded-2xl flex flex-col items-center justify-center border-4 border-primary bg-primary shadow-xl">
+            <span class="text-7xl font-black text-white leading-none">13</span>
+            <span class="text-xs font-bold tracking-widest text-white/80 uppercase mt-1">SDG</span>
+            <span class="text-xs text-white/70 mt-0.5">Climate Action</span>
           </div>
+        </div>
 
-          <!-- Content -->
-          <div class="flex-1">
-            <p
-              class="text-xs font-semibold tracking-widest text-green-500 uppercase mb-3"
-            >
-              UN Sustainable Development Goal
-            </p>
-            <h2 class="text-3xl sm:text-4xl font-black text-white mb-4">
-              SDG 13: Take Urgent Action to Combat Climate Change
-            </h2>
-            <p class="text-gray-300 leading-relaxed mb-8">
-              Adopted in 2015 as part of the 2030 Agenda, SDG 13 calls on all
-              countries to take immediate action to combat climate change and
-              its devastating impacts. It recognises that climate change is a
-              defining issue of our time.
-            </p>
+        <!-- Content -->
+        <div class="flex-1">
+          <p class="text-xs font-bold tracking-widest text-primary uppercase mb-3">UN Sustainable Development Goal</p>
+          <h2 class="text-3xl sm:text-4xl font-black text-gray-900 mb-4">
+            SDG 13: Take Urgent Action to Combat Climate Change
+          </h2>
+          <p class="text-gray-500 leading-relaxed mb-8">
+            Adopted in 2015 as part of the 2030 Agenda, SDG 13 calls on all countries to take
+            immediate action to combat climate change and its devastating impacts. It recognises
+            that climate change is a defining issue of our time.
+          </p>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div class="p-5 rounded-xl bg-gray-800 border border-gray-700">
-                <h4 class="font-bold text-green-400 mb-2">Target 13.1</h4>
-                <p class="text-sm text-gray-300">
-                  Strengthen resilience and adaptive capacity to climate-related
-                  hazards and natural disasters.
-                </p>
-              </div>
-              <div class="p-5 rounded-xl bg-gray-800 border border-gray-700">
-                <h4 class="font-bold text-green-400 mb-2">Target 13.2</h4>
-                <p class="text-sm text-gray-300">
-                  Integrate climate change measures into national policies,
-                  strategies and planning.
-                </p>
-              </div>
-              <div class="p-5 rounded-xl bg-gray-800 border border-gray-700">
-                <h4 class="font-bold text-green-400 mb-2">Target 13.3</h4>
-                <p class="text-sm text-gray-300">
-                  Improve education, awareness-raising and capacity on climate
-                  change mitigation and adaptation.
-                </p>
-              </div>
-              <div class="p-5 rounded-xl bg-gray-800 border border-gray-700">
-                <h4 class="font-bold text-green-400 mb-2">Target 13.a</h4>
-                <p class="text-sm text-gray-300">
-                  Mobilise $100 billion/yr to address the needs of developing
-                  countries in climate action.
-                </p>
-              </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="p-5 rounded-xl bg-white border border-gray-200 shadow-sm">
+              <h4 class="font-bold text-primary mb-2">Target 13.1</h4>
+              <p class="text-sm text-gray-600">Strengthen resilience and adaptive capacity to climate-related hazards and natural disasters.</p>
+            </div>
+            <div class="p-5 rounded-xl bg-white border border-gray-200 shadow-sm">
+              <h4 class="font-bold text-primary mb-2">Target 13.2</h4>
+              <p class="text-sm text-gray-600">Integrate climate change measures into national policies, strategies and planning.</p>
+            </div>
+            <div class="p-5 rounded-xl bg-white border border-gray-200 shadow-sm">
+              <h4 class="font-bold text-primary mb-2">Target 13.3</h4>
+              <p class="text-sm text-gray-600">Improve education, awareness-raising and capacity on climate change mitigation and adaptation.</p>
+            </div>
+            <div class="p-5 rounded-xl bg-white border border-gray-200 shadow-sm">
+              <h4 class="font-bold text-primary mb-2">Target 13.a</h4>
+              <p class="text-sm text-gray-600">Mobilise $100 billion/yr to address the needs of developing countries in climate action.</p>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ============================================================
+  <!-- ============================================================
        ABOUT / CTA
   ============================================================ -->
-    <section id="about" class="py-20 bg-gray-950">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 text-center">
-        <p
-          class="text-xs font-semibold tracking-widest text-green-500 uppercase mb-3"
-        >
-          About This Project
-        </p>
-        <h2 class="text-3xl sm:text-4xl font-black text-white mb-6">
-          Understand Your Personal Climate Impact
-        </h2>
-        <p
-          class="text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed mb-10"
-        >
-          This tool calculates your commute-related carbon emissions, benchmarks
-          them against the UN SDG 13 target, and provides personalised
-          recommendations to reduce your footprint. Knowledge is the first step
-          toward change.
-        </p>
+  <section id="about" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 text-center">
+      <p class="text-xs font-bold tracking-widest text-primary uppercase mb-3">About This Project</p>
+      <h2 class="text-3xl sm:text-4xl font-black text-gray-900 mb-6">Understand Your Personal Climate Impact</h2>
+      <p class="text-gray-500 max-w-2xl mx-auto text-lg leading-relaxed mb-10">
+        This tool calculates your commute-related carbon emissions, benchmarks them against the
+        UN SDG 13 target, and provides personalised recommendations to reduce your footprint.
+        Knowledge is the first step toward change.
+      </p>
 
-        <div
-          class="flex flex-col sm:flex-row items-center justify-center gap-4"
-        >
-          <a
-            href="calculator.html"
-            class="px-8 py-4 bg-green-600 hover:bg-green-500 text-white font-bold text-lg rounded-xl transition-all hover:scale-105 shadow-lg shadow-green-900/40"
-          >
-            Start Your Carbon Audit →
-          </a>
-          <a
-            href="#stats"
-            class="px-8 py-4 border border-gray-700 hover:border-green-600 text-gray-300 hover:text-white font-semibold text-lg rounded-xl transition-all"
-          >
-            View Climate Data
-          </a>
-        </div>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="calculator.html"
+           class="px-8 py-4 bg-primary hover:bg-primary-dark text-white font-bold text-lg rounded-lg transition-all hover:scale-105 shadow-md">
+          Start Your Carbon Audit →
+        </a>
+        <a href="#stats"
+           class="px-8 py-4 border border-gray-300 hover:border-primary text-gray-700 hover:text-primary font-semibold text-lg rounded-lg transition-all">
+          View Climate Data
+        </a>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ============================================================
+  <!-- ============================================================
        FOOTER
   ============================================================ -->
-    <footer class="bg-gray-900 border-t border-gray-800 py-10">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6">
-        <div
-          class="flex flex-col sm:flex-row items-center justify-between gap-6"
-        >
-          <div class="text-center sm:text-left">
-            <p class="font-black text-white text-lg">The Vital Archive</p>
-            <p class="text-xs text-gray-500 mt-1">
-              SDG 13 Climate Action Initiative
-            </p>
-          </div>
-
-          <nav class="flex flex-wrap justify-center gap-6">
-            <a
-              href="index.html"
-              class="text-sm text-gray-400 hover:text-white transition-colors"
-              >Home</a
-            >
-            <a
-              href="calculator.html"
-              class="text-sm text-gray-400 hover:text-white transition-colors"
-              >Calculator</a
-            >
-            <a
-              href="results.html"
-              class="text-sm text-gray-400 hover:text-white transition-colors"
-              >Results</a
-            >
-            <a
-              href="#sdg-goals"
-              class="text-sm text-gray-400 hover:text-white transition-colors"
-              >SDG Goals</a
-            >
-            <a
-              href="#about"
-              class="text-sm text-gray-400 hover:text-white transition-colors"
-              >About</a
-            >
-          </nav>
-
-          <p class="text-xs text-gray-600 text-center sm:text-right">
-            &copy; 2025 Bill Alcantara<br />
-            INTROWEB Final Project
-          </p>
+  <footer class="bg-neutral text-white py-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div class="text-center sm:text-left">
+          <p class="font-black text-lg">Climate Action Editorial</p>
+          <p class="text-xs text-white/60 mt-1">SDG 13 Climate Action Initiative</p>
         </div>
+        <nav class="flex flex-wrap justify-center gap-6">
+          <a href="index.html"       class="text-sm text-white/70 hover:text-white transition-colors">Home</a>
+          <a href="calculator.html"  class="text-sm text-white/70 hover:text-white transition-colors">Calculator</a>
+          <a href="results.html"     class="text-sm text-white/70 hover:text-white transition-colors">Results</a>
+          <a href="#sdg-goals"       class="text-sm text-white/70 hover:text-white transition-colors">SDG Goals</a>
+          <a href="#about"           class="text-sm text-white/70 hover:text-white transition-colors">About</a>
+        </nav>
+        <p class="text-xs text-white/50 text-center sm:text-right">
+          &copy; 2025 Bill Alcantara<br/>INTROWEB Final Project
+        </p>
       </div>
-    </footer>
+    </div>
+  </footer>
 
-    <script>
-      // Mobile menu toggle
-      document
-        .getElementById("mobile-menu-btn")
-        .addEventListener("click", () => {
-          document.getElementById("mobile-menu").classList.toggle("hidden");
-        });
-    </script>
-  </body>
+  <script>
+    document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+  </script>
+</body>
 </html>

@@ -22,10 +22,10 @@ const MODE_LABELS = {
 const SDG_TARGET_DAILY_KG = 7.83;
 
 const DANGER_LEVELS = [
-  { max: 8,        label: 'SAFE',     color: '#22c55e' },
-  { max: 15,       label: 'MODERATE', color: '#facc15' },
-  { max: 25,       label: 'HIGH',     color: '#f97316' },
-  { max: Infinity, label: 'CRITICAL', color: '#dc2626' }
+  { max: 8,        label: 'SAFE',     color: '#2E7D32' },
+  { max: 15,       label: 'MODERATE', color: '#F57C00' },
+  { max: 25,       label: 'HIGH',     color: '#E65100' },
+  { max: Infinity, label: 'CRITICAL', color: '#D32F2F' }
 ];
 
 const PROGRESS_MAX_KG = 30; // daily scale ceiling

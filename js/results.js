@@ -8,17 +8,17 @@ const WORLD_AVG_DAILY_KG   = 20.4;  // 4700 kg/yr ÷ 230 days
 const TREE_ABSORB_KG_DAILY = 21 / 365; // ~0.0575 kg CO₂ absorbed per tree per day
 
 const DANGER_COLORS = {
-  SAFE:     '#22c55e',
-  MODERATE: '#facc15',
-  HIGH:     '#f97316',
-  CRITICAL: '#dc2626'
+  SAFE:     '#2E7D32',
+  MODERATE: '#F57C00',
+  HIGH:     '#E65100',
+  CRITICAL: '#D32F2F'
 };
 
 const DANGER_BG = {
-  SAFE:     'rgba(34,197,94,0.15)',
-  MODERATE: 'rgba(250,204,21,0.15)',
-  HIGH:     'rgba(249,115,22,0.15)',
-  CRITICAL: 'rgba(220,38,38,0.15)'
+  SAFE:     'rgba(46,125,50,0.15)',
+  MODERATE: 'rgba(245,124,0,0.15)',
+  HIGH:     'rgba(230,81,0,0.15)',
+  CRITICAL: 'rgba(211,47,47,0.15)'
 };
 
 // ---- Guard: redirect if no data ----
@@ -128,7 +128,7 @@ function populate(data) {
   if (vsEl) {
     if (diff <= 0) {
       vsEl.textContent = '✓ Within target';
-      vsEl.style.color = '#22c55e';
+      vsEl.style.color = '#2E7D32';
     } else {
       vsEl.textContent = '+' + diff.toFixed(1) + ' kg over';
       vsEl.style.color = color;
@@ -142,7 +142,7 @@ function populate(data) {
   if (ctxEl) {
     if (diff <= 0) {
       ctxEl.textContent = `You are within the SDG 13 daily target of ~8 kg CO₂/day.`;
-      ctxEl.style.color = '#22c55e';
+      ctxEl.style.color = '#2E7D32';
     } else {
       const over = Math.round((data.dailyKg / SDG_TARGET_DAILY_KG - 1) * 100);
       ctxEl.textContent = `You are ${over}% above the SDG 13 daily target of ~8 kg CO₂/day.`;
@@ -206,11 +206,11 @@ function buildRecCards(data) {
   if (!container) return;
   const recs = buildRecommendations(data);
   container.innerHTML = recs.map(r => `
-    <div class="rec-card bg-gray-800 border border-gray-700 rounded-xl p-6">
+    <div class="rec-card bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
       <div class="text-4xl mb-3">${r.icon}</div>
-      <h3 class="text-lg font-bold text-white mb-2">${r.title}</h3>
-      <p class="text-gray-300 text-sm leading-relaxed mb-4">${r.desc}</p>
-      <span class="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-green-900/50 text-green-400 border border-green-800">
+      <h3 class="text-lg font-bold text-gray-900 mb-2">${r.title}</h3>
+      <p class="text-gray-600 text-sm leading-relaxed mb-4">${r.desc}</p>
+      <span class="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-green-50 text-green-800 border border-green-200">
         ${r.saving}
       </span>
     </div>
