@@ -3,29 +3,28 @@
    ============================================================ */
 
 const EMISSION_FACTORS = {
-  car:      0.21,
-  bus:      0.089,
-  train:    0.041,
-  bicycle:  0,
-  walking:  0
+  car:     0.21,
+  bus:     0.089,
+  train:   0.041,
+  bicycle: 0,
+  walking: 0
 };
 
 const MODE_LABELS = {
-  car:      '🚗 Car',
-  bus:      '🚌 Bus',
-  train:    '🚆 Train',
-  bicycle:  '🚲 Bicycle',
-  walking:  '🚶 Walking'
+  car:     '🚗 Car',
+  bus:     '🚌 Bus',
+  train:   '🚆 Train',
+  bicycle: '🚲 Bicycle',
+  walking: '🚶 Walking'
 };
 
-// ~8 kg/day = 1800 kg/yr ÷ 230 working days
-const SDG_TARGET_DAILY_KG = 7.83;
+const SDG_TARGET_DAILY_KG = 7.83; // ~8 kg/day = 1800 kg/yr ÷ 230 working days
 
 const DANGER_LEVELS = [
-  { max: 8,        label: 'SAFE',     color: '#2E7D32' },
-  { max: 15,       label: 'MODERATE', color: '#F57C00' },
-  { max: 25,       label: 'HIGH',     color: '#E65100' },
-  { max: Infinity, label: 'CRITICAL', color: '#D32F2F' }
+  { max: 8,        label: 'SAFE'     },
+  { max: 15,       label: 'MODERATE' },
+  { max: 25,       label: 'HIGH'     },
+  { max: Infinity, label: 'CRITICAL' }
 ];
 
 const PROGRESS_MAX_KG = 30; // daily scale ceiling
@@ -45,7 +44,7 @@ function getProgressWidth(dailyKg) {
 
 // ---- DOM helpers ----
 function getFormValues() {
-  const modeInput = document.querySelector('input[name="transport-mode"]:checked');
+  const modeInput  = document.querySelector('input[name="transport-mode"]:checked');
   const mode       = modeInput ? modeInput.value : null;
   const distanceKm = parseFloat(document.getElementById('distance').value) || 0;
   return { mode, distanceKm };
@@ -56,34 +55,35 @@ function updateLivePanel() {
   const panel = document.getElementById('live-panel');
   if (!panel) return;
 
+  const dangerEl = panel.querySelector('#lp-danger');
+  const fill     = document.getElementById('progress-fill');
+  const pctLabel = document.getElementById('progress-pct');
+
   if (!mode || distanceKm <= 0) {
     panel.querySelector('#lp-transport').textContent = mode ? MODE_LABELS[mode] : '—';
     panel.querySelector('#lp-daily').textContent     = '—';
-    panel.querySelector('#lp-danger').textContent    = '—';
-    panel.querySelector('#lp-danger').style.color    = '#9ca3af';
-    const fill = document.getElementById('progress-fill');
-    if (fill) { fill.style.width = '0%'; fill.style.backgroundColor = '#374151'; }
+    dangerEl.textContent                             = '—';
+    dangerEl.setAttribute('data-level', 'none');
+    if (fill)     { fill.setAttribute('data-level', 'none'); fill.style.setProperty('--fill-width', '0%'); }
+    if (pctLabel) pctLabel.textContent = '0%';
     return;
   }
 
   const { dailyKg } = calculateEmissions(mode, distanceKm);
-  const danger = getDangerLevel(dailyKg);
-  const width  = getProgressWidth(dailyKg);
+  const danger      = getDangerLevel(dailyKg);
+  const width       = getProgressWidth(dailyKg);
 
   panel.querySelector('#lp-transport').textContent = MODE_LABELS[mode];
   panel.querySelector('#lp-daily').textContent     = dailyKg.toFixed(2) + ' kg CO₂';
 
-  const dangerEl = panel.querySelector('#lp-danger');
   dangerEl.textContent = danger.label;
-  dangerEl.style.color = danger.color;
+  dangerEl.setAttribute('data-level', danger.label);
 
-  const fill = document.getElementById('progress-fill');
   if (fill) {
-    fill.style.width           = width + '%';
-    fill.style.backgroundColor = danger.color;
+    fill.setAttribute('data-level', danger.label);
+    fill.style.setProperty('--fill-width', width + '%');
   }
 
-  const pctLabel = document.getElementById('progress-pct');
   if (pctLabel) pctLabel.textContent = Math.round(width) + '%';
 }
 
@@ -99,9 +99,7 @@ function setupRadioStyles() {
   });
 
   const checked = document.querySelector('input[name="transport-mode"]:checked');
-  if (checked) {
-    checked.closest('.mode-option')?.classList.add('selected');
-  }
+  if (checked) checked.closest('.mode-option')?.classList.add('selected');
 }
 
 // ---- Validation ----
@@ -111,9 +109,9 @@ function validateForm() {
   const email = document.getElementById('user-email')?.value.trim();
   const errors = [];
 
-  if (!mode)                        errors.push('Please select a transport mode.');
-  if (!distanceKm || distanceKm<=0) errors.push('Please enter a valid distance (> 0 km).');
-  if (!name)                        errors.push('Please enter your name.');
+  if (!mode)                         errors.push('Please select a transport mode.');
+  if (!distanceKm || distanceKm <= 0) errors.push('Please enter a valid distance (> 0 km).');
+  if (!name)                         errors.push('Please enter your name.');
   if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.push('Please enter a valid email address.');
 
   return errors;
@@ -157,11 +155,9 @@ function handleSubmit(e) {
   const danger = getDangerLevel(dailyKg);
 
   const payload = {
-    name, email, mode,
-    distanceKm,
+    name, email, mode, distanceKm,
     dailyKg:     parseFloat(dailyKg.toFixed(4)),
     dangerLabel: danger.label,
-    dangerColor: danger.color,
     timestamp:   new Date().toISOString()
   };
 

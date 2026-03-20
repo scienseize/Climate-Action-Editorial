@@ -21,32 +21,7 @@
     }
   </script>
   <link rel="stylesheet" href="css/styles.css" />
-  <style>
-    /* Hero photo + left-to-right fade overlay */
-    .hero-photo {
-      background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1920&q=80');
-      background-size: cover;
-      background-position: center 40%;
-    }
-    .hero-photo::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        to right,
-        rgba(255,255,255,0.96) 0%,
-        rgba(255,255,255,0.85) 38%,
-        rgba(255,255,255,0.35) 62%,
-        transparent 80%
-      );
-    }
-    /* Nav link active underline */
-    .nav-active {
-      color: #2E7D32;
-      border-bottom: 2px solid #2E7D32;
-      padding-bottom: 2px;
-    }
-  </style>
+
 </head>
 <body class="bg-white text-gray-900 font-sans">
 
@@ -63,14 +38,12 @@
 
       <!-- Desktop Nav -->
       <nav class="hidden md:flex items-center gap-8">
-        <a href="#impact"    class="nav-active text-sm font-medium transition-colors">Impact</a>
-        <a href="#sdg-goals" class="nav-link text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">SDG Goals</a>
-        <a href="#about"     class="nav-link text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">About</a>
+        <a href="index.html"      class="text-sm font-bold text-primary border-b-2 border-primary pb-0.5">Home</a>
+        <a href="#impact"         class="nav-link text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Impact</a>
+        <a href="#sdg-goals"      class="nav-link text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">SDG Goals</a>
+        <a href="#about"          class="nav-link text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">About</a>
         <a href="calculator.html" class="nav-link text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Calculator</a>
-        <a href="calculator.html"
-           class="ml-4 px-5 py-2.5 bg-primary hover:bg-primary-dark text-white text-sm font-bold rounded-lg transition-colors shadow-sm">
-          Take Action
-        </a>
+        <a href="results.html"    class="nav-link text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Results</a>
       </nav>
 
       <!-- Mobile hamburger -->
@@ -84,11 +57,12 @@
     <!-- Mobile menu -->
     <div id="mobile-menu" class="hidden md:hidden border-t border-gray-200 bg-white">
       <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-3">
-        <a href="#impact"    class="text-sm font-medium text-primary py-2">Impact</a>
-        <a href="#sdg-goals" class="text-sm font-medium text-gray-600 hover:text-gray-900 py-2">SDG Goals</a>
-        <a href="#about"     class="text-sm font-medium text-gray-600 hover:text-gray-900 py-2">About</a>
+        <a href="index.html"      class="text-sm font-bold text-primary py-2">Home</a>
+        <a href="#impact"         class="text-sm font-medium text-gray-600 hover:text-gray-900 py-2">Impact</a>
+        <a href="#sdg-goals"      class="text-sm font-medium text-gray-600 hover:text-gray-900 py-2">SDG Goals</a>
+        <a href="#about"          class="text-sm font-medium text-gray-600 hover:text-gray-900 py-2">About</a>
         <a href="calculator.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 py-2">Calculator</a>
-        <a href="calculator.html" class="px-4 py-2 bg-primary text-white text-sm font-bold rounded-lg text-center">Take Action</a>
+        <a href="results.html"    class="text-sm font-medium text-gray-600 hover:text-gray-900 py-2">Results</a>
       </div>
     </div>
   </header>

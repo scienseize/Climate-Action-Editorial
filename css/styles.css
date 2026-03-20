@@ -1,23 +1,54 @@
+/* ============================================================
+   SDG 13 Climate Action — Custom Stylesheet
+   Handles: hero, transitions, animations, dynamic state theming
+   ============================================================ */
+
+/* ---------- Hero (index.html) ---------- */
+.hero-photo {
+  background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1920&q=80');
+  background-size: cover;
+  background-position: center 40%;
+}
+
+.hero-photo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.96) 0%,
+    rgba(255, 255, 255, 0.85) 38%,
+    rgba(255, 255, 255, 0.35) 62%,
+    transparent 80%
+  );
+}
+
+/* ---------- Nav active state ---------- */
+.nav-active {
+  color: #2E7D32;
+  border-bottom: 2px solid #2E7D32;
+  padding-bottom: 2px;
+}
+
 /* ---------- Progress Bar ---------- */
 #progress-fill {
-  transition:
-    width 0.6s ease-out,
-    background-color 0.4s ease;
+  width: var(--fill-width, 0%);
+  background-color: #e5e7eb;
+  transition: width 0.6s ease-out, background-color 0.4s ease;
 }
 
 /* ---------- Bar Chart ---------- */
 .chart-bar {
+  height: var(--bar-height, 0%);
+  min-height: 4px;
   transition: height 0.8s ease-out;
 }
 
-/* ---------- Radio Transport Mode (light theme) ---------- */
+/* ---------- Radio Transport Mode ---------- */
 .mode-option {
   cursor: pointer;
   border: 2px solid #e5e7eb;
-  transition:
-    border-color 0.2s,
-    background-color 0.2s,
-    box-shadow 0.2s;
+  transition: border-color 0.2s, background-color 0.2s, box-shadow 0.2s;
 }
 
 .mode-option:hover {
@@ -31,7 +62,7 @@
   box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.15);
 }
 
-/* ---------- Smooth page transitions ---------- */
+/* ---------- Smooth page fade-in ---------- */
 body {
   opacity: 0;
   animation: fadeIn 0.4s ease-out forwards;
@@ -43,9 +74,7 @@ body {
 
 /* ---------- Stat card hover ---------- */
 .stat-card {
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .stat-card:hover {
@@ -53,13 +82,13 @@ body {
   box-shadow: 0 8px 30px rgba(46, 125, 50, 0.12);
 }
 
-/* ---------- Nav link underline ---------- */
+/* ---------- Nav link hover underline ---------- */
 .nav-link {
   position: relative;
 }
 
 .nav-link::after {
-  content: "";
+  content: '';
   position: absolute;
   bottom: -2px;
   left: 0;
@@ -75,9 +104,7 @@ body {
 
 /* ---------- Recommendation card hover ---------- */
 .rec-card {
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .rec-card:hover {
@@ -85,7 +112,59 @@ body {
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.10);
 }
 
-/* ---------- Scrollbar styling ---------- */
+/* ============================================================
+   DANGER LEVEL THEMING — driven by data-level attribute set in JS
+   ============================================================ */
+
+/* Text color for lp-danger, res-daily, res-vs-target, res-context */
+[data-level="none"]     { color: #9ca3af; }
+[data-level="SAFE"]     { color: #2E7D32; }
+[data-level="MODERATE"] { color: #F57C00; }
+[data-level="HIGH"]     { color: #E65100; }
+[data-level="CRITICAL"] { color: #D32F2F; }
+
+/* Progress bar fill color */
+#progress-fill[data-level="none"]     { background-color: #e5e7eb; }
+#progress-fill[data-level="SAFE"]     { background-color: #2E7D32; }
+#progress-fill[data-level="MODERATE"] { background-color: #F57C00; }
+#progress-fill[data-level="HIGH"]     { background-color: #E65100; }
+#progress-fill[data-level="CRITICAL"] { background-color: #D32F2F; }
+
+/* Results badge (border + background + text) */
+#res-badge[data-level="SAFE"] {
+  color: #2E7D32;
+  border-color: #2E7D32;
+  background-color: rgba(46, 125, 50, 0.12);
+}
+#res-badge[data-level="MODERATE"] {
+  color: #F57C00;
+  border-color: #F57C00;
+  background-color: rgba(245, 124, 0, 0.12);
+}
+#res-badge[data-level="HIGH"] {
+  color: #E65100;
+  border-color: #E65100;
+  background-color: rgba(230, 81, 0, 0.12);
+}
+#res-badge[data-level="CRITICAL"] {
+  color: #D32F2F;
+  border-color: #D32F2F;
+  background-color: rgba(211, 47, 47, 0.12);
+}
+
+/* User bar chart color */
+#bar-user[data-level="SAFE"]     { background-color: #2E7D32; }
+#bar-user[data-level="MODERATE"] { background-color: #F57C00; }
+#bar-user[data-level="HIGH"]     { background-color: #E65100; }
+#bar-user[data-level="CRITICAL"] { background-color: #D32F2F; }
+
+/* Legend user dot color */
+#legend-user-dot[data-level="SAFE"]     { background-color: #2E7D32; }
+#legend-user-dot[data-level="MODERATE"] { background-color: #F57C00; }
+#legend-user-dot[data-level="HIGH"]     { background-color: #E65100; }
+#legend-user-dot[data-level="CRITICAL"] { background-color: #D32F2F; }
+
+/* ---------- Scrollbar ---------- */
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: #f1f5f9; }
 ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
