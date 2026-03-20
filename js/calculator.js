@@ -203,7 +203,6 @@ function updateLivePanel() {
 
 function validateForm() {
   const legs = getLegs();
-  const email = document.getElementById("user-email")?.value.trim();
   const errors = [];
 
   const validLegs = legs.filter((l) => l.mode && l.distanceKm > 0);
@@ -211,8 +210,6 @@ function validateForm() {
     errors.push(
       "Please add at least one commute leg with a mode and distance.",
     );
-  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
-    errors.push("Please enter a valid email address.");
 
   return errors;
 }
@@ -228,36 +225,6 @@ function showErrors(errors) {
   box.innerHTML = errors.map((e) => `<p>• ${e}</p>`).join("");
 }
 
-// ---- localStorage pre-fill ----
-
-function prefillFromStorage() {
-  const raw = localStorage.getItem("climateCalcResult");
-  if (!raw) return;
-  try {
-    const d = JSON.parse(raw);
-    const container = document.getElementById("legs-container");
-
-    if (d.legs && Array.isArray(d.legs) && d.legs.length > 0) {
-      // New multi-leg format
-      if (container) container.innerHTML = "";
-      d.legs.forEach((leg) => {
-        const row = createLegRow(leg.mode, leg.distanceKm);
-        if (container) container.appendChild(row);
-      });
-    } else if (d.mode || d.distanceKm) {
-      // Backward compat: single mode/distance pair
-      if (container) container.innerHTML = "";
-      const row = createLegRow(d.mode || "", d.distanceKm || "");
-      if (container) container.appendChild(row);
-    }
-
-    refreshRemoveButtons();
-    if (d.name) document.getElementById("user-name").value = d.name;
-    if (d.email) document.getElementById("user-email").value = d.email;
-  } catch (e) {
-    /* ignore */
-  }
-}
 
 // ---- Submit ----
 
@@ -268,8 +235,6 @@ function handleSubmit(e) {
   if (errors.length > 0) return;
 
   const legs = getLegs().filter((l) => l.mode && l.distanceKm > 0);
-  const name = document.getElementById("user-name").value.trim();
-  const email = document.getElementById("user-email").value.trim();
 
   const dailyKg = legs.reduce(
     (s, l) => s + EMISSION_FACTORS[l.mode] * l.distanceKm * 2,
@@ -286,8 +251,6 @@ function handleSubmit(e) {
   );
 
   const payload = {
-    name,
-    email,
     legs,
     primaryMode: primaryLeg.mode,
     distanceKm: legs.reduce((s, l) => s + l.distanceKm, 0),
@@ -304,7 +267,6 @@ function handleSubmit(e) {
     distanceKm: payload.distanceKm,
     dailyKg: payload.dailyKg,
     dangerLabel: payload.dangerLabel,
-    name: payload.name,
     timestamp: payload.timestamp,
   });
   window.location.href = "results.html?" + params.toString();
@@ -315,13 +277,13 @@ function handleSubmit(e) {
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("legs-container");
 
+  // Clear any previous result so the form always starts blank on load/refresh
+  localStorage.removeItem("climateCalcResult");
+
   // Create one default leg row
   if (container) {
     container.appendChild(createLegRow());
   }
-
-  // Pre-fill from storage (replaces default row if data exists)
-  prefillFromStorage();
 
   // Sync remove button visibility
   refreshRemoveButtons();
