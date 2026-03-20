@@ -1,32 +1,25 @@
-/* ============================================================
-   SDG 13 Climate Action — Custom Stylesheet
-   Handles: hero, transitions, animations, dynamic state theming
-   ============================================================ */
-
 /* ---------- Hero (index.html) ---------- */
 .hero-photo {
-  background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1920&q=80');
+  background-image: url("../assets/commute.jpg");
   background-size: cover;
   background-position: center 40%;
 }
 
 .hero-photo::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to right,
-    rgba(255, 255, 255, 0.96) 0%,
-    rgba(255, 255, 255, 0.85) 38%,
-    rgba(255, 255, 255, 0.35) 62%,
-    transparent 80%
-  );
+  background: linear-gradient(to right,
+      rgba(255, 255, 255, 0.96) 0%,
+      rgba(255, 255, 255, 0.85) 38%,
+      rgba(255, 255, 255, 0.35) 62%,
+      transparent 80%);
 }
 
 /* ---------- Nav active state ---------- */
 .nav-active {
-  color: #2E7D32;
-  border-bottom: 2px solid #2E7D32;
+  color: #2e7d32;
+  border-bottom: 2px solid #2e7d32;
   padding-bottom: 2px;
 }
 
@@ -34,7 +27,9 @@
 #progress-fill {
   width: var(--fill-width, 0%);
   background-color: #e5e7eb;
-  transition: width 0.6s ease-out, background-color 0.4s ease;
+  transition:
+    width 0.6s ease-out,
+    background-color 0.4s ease;
 }
 
 /* ---------- Bar Chart ---------- */
@@ -48,16 +43,19 @@
 .mode-option {
   cursor: pointer;
   border: 2px solid #e5e7eb;
-  transition: border-color 0.2s, background-color 0.2s, box-shadow 0.2s;
+  transition:
+    border-color 0.2s,
+    background-color 0.2s,
+    box-shadow 0.2s;
 }
 
 .mode-option:hover {
-  border-color: #2E7D32;
+  border-color: #2e7d32;
   background-color: rgba(46, 125, 50, 0.05);
 }
 
 .mode-option.selected {
-  border-color: #2E7D32;
+  border-color: #2e7d32;
   background-color: rgba(46, 125, 50, 0.08);
   box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.15);
 }
@@ -69,12 +67,16 @@ body {
 }
 
 @keyframes fadeIn {
-  to { opacity: 1; }
+  to {
+    opacity: 1;
+  }
 }
 
 /* ---------- Stat card hover ---------- */
 .stat-card {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .stat-card:hover {
@@ -88,13 +90,13 @@ body {
 }
 
 .nav-link::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -2px;
   left: 0;
   width: 0;
   height: 2px;
-  background: #2E7D32;
+  background: #2e7d32;
   transition: width 0.25s ease;
 }
 
@@ -104,49 +106,108 @@ body {
 
 /* ---------- Recommendation card hover ---------- */
 .rec-card {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .rec-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.10);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
 }
 
-/* ============================================================
-   DANGER LEVEL THEMING — driven by data-level attribute set in JS
-   ============================================================ */
-
 /* Text color for lp-danger, res-daily, res-vs-target, res-context */
-[data-level="none"]     { color: #9ca3af; }
-[data-level="SAFE"]     { color: #2E7D32; }
-[data-level="MODERATE"] { color: #F57C00; }
-[data-level="HIGH"]     { color: #E65100; }
-[data-level="CRITICAL"] { color: #D32F2F; }
+[data-level="none"] {
+  color: #9ca3af;
+}
+
+[data-level="SAFE"] {
+  color: #2e7d32;
+}
+
+[data-level="MODERATE"] {
+  color: #f57c00;
+}
+
+[data-level="HIGH"] {
+  color: #e65100;
+}
+
+[data-level="CRITICAL"] {
+  color: #d32f2f;
+}
 
 /* Progress bar fill color */
-#progress-fill[data-level="none"]     { background-color: #e5e7eb; }
-#progress-fill[data-level="SAFE"]     { background-color: #2E7D32; }
-#progress-fill[data-level="MODERATE"] { background-color: #F57C00; }
-#progress-fill[data-level="HIGH"]     { background-color: #E65100; }
-#progress-fill[data-level="CRITICAL"] { background-color: #D32F2F; }
+#progress-fill[data-level="none"] {
+  background-color: #e5e7eb;
+}
+
+#progress-fill[data-level="SAFE"] {
+  background-color: #2e7d32;
+}
+
+#progress-fill[data-level="MODERATE"] {
+  background-color: #f57c00;
+}
+
+#progress-fill[data-level="HIGH"] {
+  background-color: #e65100;
+}
+
+#progress-fill[data-level="CRITICAL"] {
+  background-color: #d32f2f;
+}
 
 /* Results badge — large urgency text, color only */
-#res-badge[data-level="SAFE"]     { color: #2E7D32; }
-#res-badge[data-level="MODERATE"] { color: #F57C00; }
-#res-badge[data-level="HIGH"]     { color: #E65100; }
-#res-badge[data-level="CRITICAL"] { color: #111827; }
+#res-badge[data-level="SAFE"] {
+  color: #2e7d32;
+}
+
+#res-badge[data-level="MODERATE"] {
+  color: #f57c00;
+}
+
+#res-badge[data-level="HIGH"] {
+  color: #e65100;
+}
+
+#res-badge[data-level="CRITICAL"] {
+  color: #111827;
+}
 
 /* User bar chart color */
-#bar-user[data-level="SAFE"]     { background-color: #2E7D32; }
-#bar-user[data-level="MODERATE"] { background-color: #F57C00; }
-#bar-user[data-level="HIGH"]     { background-color: #E65100; }
-#bar-user[data-level="CRITICAL"] { background-color: #D32F2F; }
+#bar-user[data-level="SAFE"] {
+  background-color: #2e7d32;
+}
+
+#bar-user[data-level="MODERATE"] {
+  background-color: #f57c00;
+}
+
+#bar-user[data-level="HIGH"] {
+  background-color: #e65100;
+}
+
+#bar-user[data-level="CRITICAL"] {
+  background-color: #d32f2f;
+}
 
 /* Legend user dot color */
-#legend-user-dot[data-level="SAFE"]     { background-color: #2E7D32; }
-#legend-user-dot[data-level="MODERATE"] { background-color: #F57C00; }
-#legend-user-dot[data-level="HIGH"]     { background-color: #E65100; }
-#legend-user-dot[data-level="CRITICAL"] { background-color: #D32F2F; }
+#legend-user-dot[data-level="SAFE"] {
+  background-color: #2e7d32;
+}
+
+#legend-user-dot[data-level="MODERATE"] {
+  background-color: #f57c00;
+}
+
+#legend-user-dot[data-level="HIGH"] {
+  background-color: #e65100;
+}
+
+#legend-user-dot[data-level="CRITICAL"] {
+  background-color: #d32f2f;
+}
 
 /* ---------- Horizontal bar chart (results page) ---------- */
 .h-bar {
@@ -154,14 +215,29 @@ body {
   transition: width 0.8s ease-out;
 }
 
-#bar-user-h[data-level="SAFE"]     { background-color: #2E7D32; }
-#bar-user-h[data-level="MODERATE"] { background-color: #F57C00; }
-#bar-user-h[data-level="HIGH"]     { background-color: #E65100; }
-#bar-user-h[data-level="CRITICAL"] { background-color: #D32F2F; }
+#bar-user-h[data-level="SAFE"] {
+  background-color: #2e7d32;
+}
+
+#bar-user-h[data-level="MODERATE"] {
+  background-color: #f57c00;
+}
+
+#bar-user-h[data-level="HIGH"] {
+  background-color: #e65100;
+}
+
+#bar-user-h[data-level="CRITICAL"] {
+  background-color: #d32f2f;
+}
 
 /* ---------- Urgency gradient bar ---------- */
 .urgency-gradient-bar {
-  background: linear-gradient(to right, #22c55e 0%, #facc15 35%, #ef4444 70%, #d1d5db 100%);
+  background: linear-gradient(to right,
+      #22c55e 0%,
+      #facc15 35%,
+      #ef4444 70%,
+      #d1d5db 100%);
 }
 
 #urgency-indicator {
@@ -193,7 +269,19 @@ body {
 }
 
 /* ---------- Scrollbar ---------- */
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: #f1f5f9; }
-::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: #2E7D32; }
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2e7d32;
+}
