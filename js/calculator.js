@@ -111,7 +111,6 @@ function validateForm() {
 
   if (!mode)                         errors.push('Please select a transport mode.');
   if (!distanceKm || distanceKm <= 0) errors.push('Please enter a valid distance (> 0 km).');
-  if (!name)                         errors.push('Please enter your name.');
   if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.push('Please enter a valid email address.');
 
   return errors;
@@ -162,7 +161,15 @@ function handleSubmit(e) {
   };
 
   localStorage.setItem('climateCalcResult', JSON.stringify(payload));
-  window.location.href = 'results.html';
+  const params = new URLSearchParams({
+    mode:        payload.mode,
+    distanceKm:  payload.distanceKm,
+    dailyKg:     payload.dailyKg,
+    dangerLabel: payload.dangerLabel,
+    name:        payload.name,
+    timestamp:   payload.timestamp
+  });
+  window.location.href = 'results.html?' + params.toString();
 }
 
 // ---- Init ----
