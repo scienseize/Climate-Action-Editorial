@@ -83,19 +83,19 @@
         <div class="stat-card rounded-2xl border border-gray-700 bg-gray-800 p-8 text-center">
           <p class="text-xs font-semibold tracking-widest text-gray-500 uppercase mb-3">Daily Emissions</p>
           <p id="res-daily" class="text-4xl font-black text-white mb-2">—</p>
-          <p class="text-sm text-gray-400">CO₂ per commute day</p>
+          <p class="text-sm text-gray-400">CO₂ per commute day (round trip)</p>
         </div>
 
         <div class="stat-card rounded-2xl border border-gray-700 bg-gray-800 p-8 text-center">
-          <p class="text-xs font-semibold tracking-widest text-gray-500 uppercase mb-3">Yearly Total</p>
-          <p id="res-yearly" class="text-4xl font-black text-white mb-2">—</p>
-          <p class="text-sm text-gray-400">CO₂ from commuting/year</p>
+          <p class="text-xs font-semibold tracking-widest text-gray-500 uppercase mb-3">vs. Daily Target</p>
+          <p id="res-vs-target" class="text-4xl font-black text-white mb-2">—</p>
+          <p class="text-sm text-gray-400">SDG 13 daily budget is ~8 kg</p>
         </div>
 
         <div class="stat-card rounded-2xl border border-gray-700 bg-gray-800 p-8 text-center">
-          <p class="text-xs font-semibold tracking-widest text-gray-500 uppercase mb-3">Trees Needed</p>
+          <p class="text-xs font-semibold tracking-widest text-gray-500 uppercase mb-3">Trees / Year</p>
           <p id="res-trees" class="text-4xl font-black text-green-400 mb-2">—</p>
-          <p class="text-sm text-gray-400">to offset annual emissions</p>
+          <p class="text-sm text-gray-400">to offset your daily commute all year</p>
         </div>
 
       </div>
@@ -103,8 +103,8 @@
 
     <!-- ---- BAR CHART ---- -->
     <section>
-      <h2 class="text-xl font-bold text-white mb-2">Yearly Comparison</h2>
-      <p class="text-sm text-gray-400 mb-8">Your commute emissions vs. global benchmarks (CO₂ tonnes per year)</p>
+      <h2 class="text-xl font-bold text-white mb-2">Daily Comparison</h2>
+      <p class="text-sm text-gray-400 mb-8">Your daily commute emissions vs. global benchmarks (kg CO₂ per day)</p>
 
       <div class="rounded-2xl border border-gray-700 bg-gray-800/50 p-8">
         <div class="flex items-end justify-center gap-8 sm:gap-16" style="height: 260px;">
@@ -140,11 +140,11 @@
           </div>
           <div class="flex items-center gap-2">
             <span class="w-3 h-3 rounded-sm inline-block bg-green-600"></span>
-            <span class="text-xs text-gray-400">SDG 13 Target (1.8 t/yr)</span>
+            <span class="text-xs text-gray-400">SDG 13 Target (~8 kg/day)</span>
           </div>
           <div class="flex items-center gap-2">
             <span class="w-3 h-3 rounded-sm inline-block bg-yellow-500"></span>
-            <span class="text-xs text-gray-400">World Average (4.7 t/yr)</span>
+            <span class="text-xs text-gray-400">World Average (~20 kg/day)</span>
           </div>
         </div>
       </div>

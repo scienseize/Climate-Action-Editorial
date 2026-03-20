@@ -145,31 +145,10 @@
             </div>
           </div>
 
-          <!-- Step 3: Working Days -->
-          <div class="mb-6">
-            <label for="working-days" class="block text-lg font-bold text-white mb-1">
-              <span class="text-green-400 mr-2">03</span>Working Days Per Year
-            </label>
-            <p class="text-sm text-gray-400 mb-3">Number of days you commute annually (typical full-time = 230 days).</p>
-            <div class="flex items-center gap-3">
-              <input
-                type="number"
-                id="working-days"
-                name="working-days"
-                min="1"
-                max="365"
-                value="230"
-                required
-                class="flex-1 bg-gray-800 border border-gray-700 focus:border-green-500 focus:outline-none text-white rounded-xl px-4 py-3 text-lg transition-colors"
-              />
-              <span class="text-gray-400 font-semibold">days</span>
-            </div>
-          </div>
-
-          <!-- Step 4: Name -->
+          <!-- Step 3: Name -->
           <div class="mb-6">
             <label for="user-name" class="block text-lg font-bold text-white mb-1">
-              <span class="text-green-400 mr-2">04</span>Your Name
+              <span class="text-green-400 mr-2">03</span>Your Name
             </label>
             <p class="text-sm text-gray-400 mb-3">Used to personalise your results dashboard.</p>
             <input
@@ -183,10 +162,10 @@
             />
           </div>
 
-          <!-- Step 5: Email (optional) -->
+          <!-- Step 4: Email (optional) -->
           <div class="mb-8">
             <label for="user-email" class="block text-lg font-bold text-white mb-1">
-              <span class="text-green-400 mr-2">05</span>Email
+              <span class="text-green-400 mr-2">04</span>Email
               <span class="text-sm font-normal text-gray-500 ml-2">(optional)</span>
             </label>
             <p class="text-sm text-gray-400 mb-3">For your records only — we do not transmit or store this externally.</p>
@@ -226,15 +205,9 @@
           </div>
 
           <!-- Emissions -->
-          <div class="grid grid-cols-2 gap-4 mb-6 pb-6 border-b border-gray-700">
-            <div>
-              <p class="text-xs text-gray-500 uppercase tracking-wider mb-1">Daily CO₂</p>
-              <p id="lp-daily" class="text-lg font-bold text-white">—</p>
-            </div>
-            <div>
-              <p class="text-xs text-gray-500 uppercase tracking-wider mb-1">Yearly CO₂</p>
-              <p id="lp-yearly" class="text-lg font-bold text-white">—</p>
-            </div>
+          <div class="mb-6 pb-6 border-b border-gray-700">
+            <p class="text-xs text-gray-500 uppercase tracking-wider mb-1">Daily CO₂ (round trip)</p>
+            <p id="lp-daily" class="text-3xl font-black text-white">—</p>
           </div>
 
           <!-- Danger Level -->
@@ -246,7 +219,7 @@
           <!-- Progress Bar -->
           <div>
             <div class="flex justify-between items-center mb-2">
-              <p class="text-xs text-gray-500 uppercase tracking-wider">vs. 8t/yr max scale</p>
+              <p class="text-xs text-gray-500 uppercase tracking-wider">vs. 30 kg/day scale</p>
               <p id="progress-pct" class="text-xs font-semibold text-gray-400">0%</p>
             </div>
             <div class="h-4 bg-gray-700 rounded-full overflow-hidden">
@@ -254,17 +227,16 @@
             </div>
             <div class="flex justify-between mt-1">
               <span class="text-xs text-green-500">0</span>
-              <span class="text-xs text-green-500">✓ SDG Target 1.8t</span>
-              <span class="text-xs text-red-500">8t+</span>
+              <span class="text-xs text-green-500">✓ ~8 kg/day target</span>
+              <span class="text-xs text-red-500">30 kg+</span>
             </div>
           </div>
 
           <!-- SDG context -->
           <div class="mt-6 p-4 rounded-xl bg-gray-900/60 border border-gray-700">
             <p class="text-xs text-gray-400 leading-relaxed">
-              <span class="text-green-400 font-semibold">SDG 13 Target:</span> 1.8 tonnes CO₂/yr per person.
-              The global average is 4.7 tonnes — nearly 3× the target.
-              Your commute is just one slice of your total footprint.
+              <span class="text-green-400 font-semibold">SDG 13 Daily Target:</span> ~8 kg CO₂/day from commuting (based on 1.8 t/yr ÷ 230 working days).
+              The world average commuter emits ~20 kg/day. Every trip counts.
             </p>
           </div>
 
