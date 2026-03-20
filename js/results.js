@@ -53,7 +53,7 @@ function indicatorPosition(level) {
 
 // Mode display label
 function modeLabel(mode) {
-  const labels = { car: 'internal combustion engine', bus: 'bus', train: 'train', bicycle: 'bicycle', walking: 'walking' };
+  const labels = { car: 'private vehicle', bus: 'bus/jeepney', train: 'MRT/LRT', bicycle: 'bicycle', walking: 'walking' };
   return labels[mode] || mode;
 }
 
@@ -87,7 +87,7 @@ function buildRecommendations(data) {
     recs.push({
       icon: REC_ICONS.transit,
       title: 'Transit Shift',
-      desc: `Take the bus ${Math.ceil(230 * 0.4)} days a week to save ${busSavingT} tons of CO2. This single change brings you ${busPct}% closer to your climate targets.`,
+      desc: `Switching to a jeepney or Bus Rapid Transit (BRT) for even 3 days a week could save ${busSavingT} tons of CO₂ annually — bringing you ${busPct}% closer to your climate targets.`,
     });
   } else if (data.mode === 'bus') {
     const trainSavingKg = (0.089 - 0.041) * data.distanceKm * 2;
@@ -95,7 +95,7 @@ function buildRecommendations(data) {
     recs.push({
       icon: REC_ICONS.transit,
       title: 'Upgrade to Rail',
-      desc: `Trains emit 54% less CO₂ than buses. Switching could save ${trainSavingT}t of CO₂ per year and bring you significantly closer to SDG 13 targets.`,
+      desc: `The MRT-3 and LRT lines emit up to 54% less CO₂ than buses. Switching could save ${trainSavingT}t of CO₂ per year and bring you significantly closer to SDG 13 targets.`,
     });
   } else {
     recs.push({
@@ -111,13 +111,13 @@ function buildRecommendations(data) {
     recs.push({
       icon: REC_ICONS.ev,
       title: 'Electrification',
-      desc: `Switching to a used EV for your commute would reduce transportation emissions by ${evPct}% immediately.`,
+      desc: `The DOE's e-vehicle incentive program makes EV adoption more accessible. Switching to an e-vehicle for your commute would reduce transportation emissions by ${evPct}% immediately.`,
     });
   } else {
     recs.push({
       icon: REC_ICONS.ev,
       title: 'Renewable Energy',
-      desc: 'Even with low-emission transport, home energy is often the largest carbon source. Switching to a green energy tariff can cut your household footprint by 2–8 kg CO₂/day.',
+      desc: 'Even with low-emission transport, household energy is a key source. The Philippines targets 35% renewable energy by 2030 — switching to a green energy provider supports this goal and can cut your home footprint significantly.',
     });
   }
 
@@ -125,7 +125,7 @@ function buildRecommendations(data) {
   recs.push({
     icon: REC_ICONS.hybrid,
     title: 'Hybrid Work',
-    desc: `Working from home just one day a week eliminates ${hybridSavingT} tons of annual emissions.`,
+    desc: `Metro Manila workers lose an average of 66 minutes to traffic daily. Working from home just one day a week eliminates ${hybridSavingT} tons of annual emissions and reclaims hours of your week.`,
   });
 
   return recs;
@@ -217,7 +217,7 @@ function populate(data) {
   // Emission summary (urgency card italic)
   const sumEl = document.getElementById('res-emission-summary');
   if (sumEl) {
-    sumEl.textContent = `You are emitting ${yearlyT} tons of CO2 annually from commuting alone.`;
+    sumEl.textContent = `You are emitting ${yearlyT} tonnes of CO₂ annually from commuting — transport is the Philippines' fastest-growing emissions sector.`;
   }
 
   // Urgency indicator position
