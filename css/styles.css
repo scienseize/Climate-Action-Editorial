@@ -1,0 +1,131 @@
+/* ---------- Progress Bar ---------- */
+#progress-fill {
+  transition:
+    width 0.6s ease-out,
+    background-color 0.4s ease;
+}
+
+/* ---------- Bar Chart ---------- */
+.chart-bar {
+  transition: height 0.8s ease-out;
+}
+
+/* ---------- Hero Background ---------- */
+.hero-bg {
+  background: linear-gradient(135deg,
+      #0d1f0d 0%,
+      #0f2d1a 30%,
+      #0a1f2e 65%,
+      #050d14 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 50%,
+      rgba(63, 126, 68, 0.18) 0%,
+      transparent 60%),
+    radial-gradient(ellipse 60% 80% at 80% 30%,
+      rgba(34, 197, 94, 0.1) 0%,
+      transparent 55%);
+  pointer-events: none;
+}
+
+/* ---------- Radio Transport Mode ---------- */
+.mode-option {
+  cursor: pointer;
+  border: 2px solid #374151;
+  transition:
+    border-color 0.2s,
+    background-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.mode-option:hover {
+  border-color: #3f7e44;
+  background-color: rgba(63, 126, 68, 0.08);
+}
+
+.mode-option.selected {
+  border-color: #22c55e;
+  background-color: rgba(34, 197, 94, 0.12);
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2);
+}
+
+/* ---------- Smooth page transitions ---------- */
+body {
+  opacity: 0;
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* ---------- Stat card hover ---------- */
+.stat-card {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(34, 197, 94, 0.15);
+}
+
+/* ---------- Nav link underline ---------- */
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #22c55e;
+  transition: width 0.25s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* ---------- Recommendation card hover ---------- */
+.rec-card {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.rec-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* ---------- Scrollbar styling ---------- */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #111827;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #374151;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3f7e44;
+}
